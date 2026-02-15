@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Report | Kochi Metro Rail Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fdfdfd;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Header & Hero */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .header-bg h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a.active {
+            background-color: #dc2626;
+            /* Red for Incident Section */
+            color: white;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Alert Box */
+        .incident-header {
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-left: 6px solid #dc2626;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .incident-header h2 {
+            color: #991b1b;
+            margin-bottom: 10px;
+        }
+
+        /* Content Sections */
+        .section-title {
+            color: #00529b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin: 35px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Emergency Response Box */
+        .response-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .response-card li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+        }
+
+        /* Image Placeholder */
+        .diagram-container {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        /* Inquiry Section */
+        .inquiry-box {
+            background: #f1f5f9;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .impact-footer {
+            background: #00529b;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        footer {
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Safety & Incident Reports</h1>
+        <p id="page-p">Official Record of Operational Disruptions and Safety Inquiries</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep" class="active">Departments</a></li>
+            <li><a href="document.html" id="nav-doc">Document</a></li>
+            <li><a href="login.html" id="nav-upload">Document Upload</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="incident-header">
+            <h2 id="inc-h">Incident Overview: Vadakkekotta Station</h2>
+            <p id="inc-p">A man named Nisar from Malappuram died after jumping from the Kochi Metro track near
+                Vadakkekotta station
+                on a Thursday afternoon. The incident prompted a temporary halt in services and an immediate
+                director-level inquiry.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="main-text">
+                <h3 class="section-title" id="seq-h">Sequence of Events</h3>
+                <p id="seq-p">The victim, identified as Nisar, a resident of Tirurangadi, purchased a ticket at
+                    Vadakkekotta
+                    station. He accessed the elevated track and walked along the viaduct before jumping in an apparent
+                    suicide attempt. Despite persuasion efforts by rescue teams and prompt medical attention at Medical
+                    Trust Hospital, he was declared dead on arrival.</p>
+
+                <h3 class="section-title" id="resp-h">Emergency Response Actions</h3>
+                <div class="response-card" id="resp-card">
+                    <ul>
+                        <li><strong id="resp-s1-h">Service Halt:</strong> <span id="resp-s1-p">Immediate cessation of
+                                movement between Thrippunithura and SN Junction.</span></li>
+                        <li><strong id="resp-s2-h">Power Isolation:</strong> <span id="resp-s2-p">Personnel activated
+                                the Emergency Trip Switch (ETS), cutting power to the third rail.</span></li>
+                        <li><strong id="resp-s3-h">Short-Loop Services:</strong> <span id="resp-s3-p">Operational
+                                continuity maintained via loops between Aluva and Kadavanthra.</span></li>
+                        <li><strong id="resp-s4-h">Rescue Deployment:</strong> <span id="resp-s4-p">Fire brigade and
+                                rescue teams prepared safety nets and attempted negotiation.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="diagram-container">
+
+                    <img src="i.jpg" alt="">
+                </div>
+
+                <div class="inquiry-box" style="margin-top: 20px;">
+                    <h4 style="color:#00529b; margin-bottom:10px;" id="inq-h">Ongoing Inquiry</h4>
+                    <p style="font-size: 0.9rem;" id="inq-p">Lead: Director of Systems (KMRL)<br>
+                        Focus: CCTV analysis, identifying security lapses, and protocol reinforcement.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title" id="impact-h">Commuter Impact</h3>
+        <p id="impact-p">While services were briefly disrupted, KMRL ensured continuity by initiating short-loop
+            services. Normal
+            operations between Kadavanthra and Thrippunithura resumed shortly after the track was cleared by
+            authorities.</p>
+
+        <div class="impact-footer">
+            <p id="impact-note"><strong>Note:</strong> Ongoing CCTV footage analysis at Vadakkekotta station is being
+                used to recommend
+                future safety improvements to surveillance protocols.</p>
+        </div>
+
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. All rights reserved. <br>
+        Safety Helpline: 1800-XXX-XXXX
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Safety & Incident Reports',
+                'page-p': 'Official Record of Operational Disruptions and Safety Inquiries',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Document',
+                'nav-upload': 'Document Upload',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'inc-h': 'Incident Overview: Vadakkekotta Station',
+                'inc-p': 'A man named Nisar from Malappuram died after jumping from the Kochi Metro track near Vadakkekotta station on a Thursday afternoon. The incident prompted a temporary halt in services and an immediate director-level inquiry.',
+                'seq-h': 'Sequence of Events',
+                'seq-p': 'The victim, identified as Nisar, a resident of Tirurangadi, purchased a ticket at Vadakkekotta station. He accessed the elevated track and walked along the viaduct before jumping in an apparent suicide attempt. Despite persuasion efforts by rescue teams and prompt medical attention at Medical Trust Hospital, he was declared dead on arrival.',
+                'resp-h': 'Emergency Response Actions',
+                'resp-s1-h': 'Service Halt:',
+                'resp-s1-p': 'Immediate cessation of movement between Thrippunithura and SN Junction.',
+                'resp-s2-h': 'Power Isolation:',
+                'resp-s2-p': 'Personnel activated the Emergency Trip Switch (ETS), cutting power to the third rail.',
+                'resp-s3-h': 'Short-Loop Services:',
+                'resp-s3-p': 'Operational continuity maintained via loops between Aluva and Kadavanthra.',
+                'resp-s4-h': 'Rescue Deployment:',
+                'resp-s4-p': 'Fire brigade and rescue teams prepared safety nets and attempted negotiation.',
+                'inq-h': 'Ongoing Inquiry',
+                'inq-p': 'Lead: Director of Systems (KMRL)\nFocus: CCTV analysis, identifying security lapses, and protocol reinforcement.',
+                'impact-h': 'Commuter Impact',
+                'impact-p': 'While services were briefly disrupted, KMRL ensured continuity by initiating short-loop services. Normal operations between Kadavanthra and Thrippunithura resumed shortly after the track was cleared by authorities.',
+                'impact-note': 'Note: Ongoing CCTV footage analysis at Vadakkekotta station is being used to recommend future safety improvements to surveillance protocols.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. All rights reserved. \nSafety Helpline: 1800-XXX-XXXX'
+            },
+            'ml': {
+                'page-h1': 'സുരക്ഷയും അപകട റിപ്പോർട്ടുകളും',
+                'page-p': 'പ്രവർത്തന തടസ്സങ്ങളുടെയും സുരക്ഷാ അന്വേഷണങ്ങളുടെയും ഔദ്യോഗിക രേഖ',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-upload': 'രേഖ അപ്‌ലോഡ്',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'inc-h': 'അപകട അവലോകനം: വടക്കേക്കോട്ട സ്റ്റേഷൻ',
+                'inc-p': 'വ്യാഴാഴ്ച ഉച്ചകഴിഞ്ഞ് വടക്കേക്കോട്ട സ്റ്റേഷന് സമീപം കൊച്ചി മെട്രോ ട്രാക്കിൽ നിന്ന് ചാടിയ മലപ്പുറം സ്വദേശി നിസാർ മരിച്ചു. ഈ സംഭവത്തെത്തുടർന്ന് സേവനങ്ങൾ താൽക്കാലികമായി നിർത്തുകയും ഡയറക്ടർ തലത്തിലുള്ള അന്വേഷണത്തിന് ഉത്തരവിടുകയും ചെയ്തു.',
+                'seq-h': 'സംഭവങ്ങളുടെ ക്രമം',
+                'seq-p': 'തിരൂരങ്ങാടി സ്വദേശിയായ നിസാർ വടക്കേക്കോട്ട സ്റ്റേഷനിൽ നിന്ന് ടിക്കറ്റ് എടുത്തു. തുടർന്ന് ട്രാക്കിലേക്ക് കടന്ന് വയഡക്റ്റിലൂടെ നടന്ന് താഴേക്ക് ചാടുകയായിരുന്നു. രക്ഷാപ്രവർത്തകരുടെ ശ്രമങ്ങൾക്കും ആശുപത്രിയിൽ എത്തിച്ചതിനും ശേഷവും ജീവൻ രക്ഷിക്കാനായില്ല.',
+                'resp-h': 'അടിയന്തര പ്രതികരണ നടപടികൾ',
+                'resp-s1-h': 'സേവനം നിർത്തലാക്കൽ:',
+                'resp-s1-p': 'തൃപ്പൂണിത്തുറയ്ക്കും എസ്എൻ ജംഗ്ഷനുമിടയിലുള്ള ട്രെയിൻ ഗതാഗതം ഉടൻ നിർത്തിവച്ചു.',
+                'resp-s2-h': 'വൈദ്യുതി വിച്ഛേദിക്കൽ:',
+                'resp-s2-p': 'എമർജൻസി ട്രിപ്പ് സ്വിച്ച് (ETS) പ്രവർത്തിപ്പിച്ച് ട്രാക്കിലേക്കുള്ള വൈദ്യുതി വിച്ഛേദിച്ചു.',
+                'resp-s3-h': 'ഷോർട്ട് ലൂപ്പ് സേവനങ്ങൾ:',
+                'resp-s3-p': 'ആലുവയ്ക്കും കടവന്ത്രയ്ക്കും ഇടയിൽ ട്രെയിൻ ഗതാഗതം തുടർന്നു.',
+                'resp-s4-h': 'രക്ഷാപ്രവർത്തനം:',
+                'resp-s4-p': 'ഫയർഫോഴ്‌സും രക്ഷാപ്രവർത്തകരും സ്ഥലത്തെത്തി ആവശ്യമായ നടപടികൾ സ്വീകരിച്ചു.',
+                'inq-h': 'അന്വേഷണം പുരോഗമിക്കുന്നു',
+                'inq-p': 'നേതൃത്വം: ഡയറക്ടർ ഓഫ് സിസ്റ്റംസ് (KMRL)\nലക്ഷ്യം: സിസിടിവി വിശകലനം, സുരക്ഷാ വീഴ്ചകൾ കണ്ടെത്തുക.',
+                'impact-h': 'യാത്രക്കാരെ ബാധിച്ചത്',
+                'impact-p': 'ട്രെയിൻ ഗതാഗതം താൽക്കാലികമായി തടസ്സപ്പെട്ടെങ്കിലും ഷോർട്ട് ലൂപ്പ് സേവനങ്ങളിലൂടെ യാത്രക്കാർക്ക് സൗകര്യമൊരുക്കി. ട്രാക്ക് ക്ലിയർ ചെയ്തതോടെ ഗതാഗതം സാധാരണ നിലയിലായി.',
+                'impact-note': 'ശ്രദ്ധിക്കുക: ഭാവിയിൽ സുരക്ഷാ മെച്ചപ്പെടുത്തലുകൾക്കായി സിസിടിവി ദൃശ്യങ്ങൾ പരിശോധിച്ച് വരുന്നു.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം. \nസുരക്ഷാ ഹെൽപ്പ് ലൈൻ: 1800-XXX-XXXX'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+
+            // Special handling for instructions inside Note
+            const impactNote = document.getElementById('impact-note');
+            if (impactNote && lang === 'ml') {
+                impactNote.innerHTML = `<strong>ശ്രദ്ധിക്കുക:</strong> ${t['impact-note'].replace('ശ്രദ്ധിക്കുക:', '')}`;
+            } else if (impactNote && lang === 'en') {
+                impactNote.innerHTML = `<strong>Note:</strong> ${t['impact-note'].replace('Note:', '')}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

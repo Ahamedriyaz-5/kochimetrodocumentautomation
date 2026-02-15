@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Policies & Careers | Kochi Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .navbar a.active {
+            background-color: #10b981;
+            /* Emerald for HR/People section */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Intro Section */
+        .policy-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 5px solid #10b981;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .policy-intro h2 {
+            color: #00529b;
+            margin-bottom: 10px;
+        }
+
+        /* Content Grid */
+        .grid-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            color: #00529b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Recruitment Steps */
+        .step-list {
+            list-style: none;
+        }
+
+        .step-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .step-list li:last-child {
+            border: none;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            padding: 15px;
+            border-radius: 8px;
+            color: #92400e;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* Compensation Table */
+        .benefit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .benefit-table td {
+            padding: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .benefit-table td:first-child {
+            font-weight: bold;
+            color: #00529b;
+            width: 40%;
+        }
+
+        /* Image Display */
+        .diagram-box {
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .diagram-box img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 850px) {
+            .grid-main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Human Resources</h1>
+        <p id="page-p">Empowering Our Workforce through Merit & Ethics</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep">Departments</a></li>
+            <li><a href="login.html" id="nav-upload">Document Upload</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <section class="policy-intro">
+            <h2 id="policy-h">Our HR Commitment</h2>
+            <p id="policy-p">Kochi Metro Rail Ltd (KMRL) follows structured HR policies emphasizing contract-based
+                employment,
+                merit-based recruitment, and strict compliance with ethical standards.</p>
+        </section>
+
+        <div class="grid-main">
+            <div class="left-column">
+
+                <div class="card">
+                    <h3 id="recruit-h">Recruitment & Selection</h3>
+                    <p id="recruit-p">KMRL conducts direct recruitment via official channels only. Applications are
+                        accepted
+                        exclusively through our online portal.</p>
+                    <ul class="step-list">
+                        <li><strong id="step1-h">Public Notification:</strong> <span id="step1-p">All openings
+                                advertised in national newspapers and official website.</span></li>
+                        <li><strong id="step2-h">Fair Selection:</strong> <span id="step2-p">Shortlisting followed by
+                                written/online tests and structured interviews.</span></li>
+                        <li><strong id="step3-h">Communication:</strong> <span id="step3-p">Only shortlisted candidates
+                                are notified via registered email.</span></li>
+                    </ul>
+                    <div class="warning-box" id="warning-box">
+                        <strong>⚠️ Anti-Fraud Warning:</strong> KMRL does not outsource recruitment. Beware of fake job
+                        advertisements on social media.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 id="tenure-h">Employment & Tenure</h3>
+                    <p id="tenure-p1">Positions are offered on a <strong>fixed-term contract basis</strong>, typically
+                        for three years,
+                        with extensions possible based on performance.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;" id="tenure-p2">High-level roles such as Director
+                        positions are
+                        subject to specific age and tenure-related superannuation limits.</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="ethics-h">General Guidelines & Ethics</h3>
+                    <ul class="step-list" style="font-size: 0.9rem;">
+                        <li><strong id="eth-s1-h">NOC:</strong> <span id="eth-s1-p">PSU/Govt employees must provide a No
+                                Objection Certificate.</span></li>
+                        <li><strong id="eth-s2-h">Ethics:</strong> <span id="eth-s2-p">Any attempt to influence the
+                                selection leads to permanent disqualification.</span></li>
+                        <li><strong id="eth-s3-h">Calculation:</strong> <span id="eth-s3-p">Age and experience are
+                                calculated strictly as per notification dates.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-column">
+
+                <div class="diagram-box">
+
+                    <img src="hr.webp" alt="">
+                </div>
+
+                <div class="card" style="margin-top: 25px;">
+                    <h3 id="comp-h">Compensation & Benefits</h3>
+                    <table class="benefit-table">
+                        <tr>
+                            <td id="comp-s1-h">Scale (AM)</td>
+                            <td id="comp-s1-p">₹50,000 – ₹1,60,000</td>
+                        </tr>
+                        <tr>
+                            <td id="comp-s2-h">Merit Bonus</td>
+                            <td id="comp-s2-p">Up to 15% enhancement</td>
+                        </tr>
+                        <tr>
+                            <td id="comp-s3-h">Incentives</td>
+                            <td id="comp-s3-p">Performance-linked increments</td>
+                        </tr>
+                        <tr>
+                            <td id="comp-s4-h">Allowances</td>
+                            <td id="comp-s4-p">As per Contract Policy</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 id="check-h">Compliance Checklist</h3>
+                    <p style="font-size: 0.85rem;" id="check-p">Mandatory documentation includes Birth Proof,
+                        Educational
+                        Certificates, Community Certificates (if applicable), and Experience records.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. <br>
+        For career-related inquiries, visit the official KMRL website portal.
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Human Resources',
+                'page-p': 'Empowering Our Workforce through Merit & Ethics',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Document',
+                'nav-upload': 'Document Upload',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'policy-h': 'Our HR Commitment',
+                'policy-p': 'Kochi Metro Rail Ltd (KMRL) follows structured HR policies emphasizing contract-based employment, merit-based recruitment, and strict compliance with ethical standards.',
+                'recruit-h': 'Recruitment & Selection',
+                'recruit-p': 'KMRL conducts direct recruitment via official channels only. Applications are accepted exclusively through our online portal.',
+                'step1-h': 'Public Notification:',
+                'step1-p': 'All openings advertised in national newspapers and official website.',
+                'step2-h': 'Fair Selection:',
+                'step2-p': 'Shortlisting followed by written/online tests and structured interviews.',
+                'step3-h': 'Communication:',
+                'step3-p': 'Only shortlisted candidates are notified via registered email.',
+                'warning-box': '⚠️ Anti-Fraud Warning: KMRL does not outsource recruitment. Beware of fake job advertisements on social media.',
+                'tenure-h': 'Employment & Tenure',
+                'tenure-p1': 'Positions are offered on a fixed-term contract basis, typically for three years.',
+                'tenure-p2': 'High-level roles like Director positions have specific age limits.',
+                'ethics-h': 'General Guidelines & Ethics',
+                'eth-s1-h': 'NOC:',
+                'eth-s1-p': 'PSU/Govt employees must provide a No Objection Certificate.',
+                'eth-s2-h': 'Ethics:',
+                'eth-s2-p': 'Any attempt to influence the selection leads to permanent disqualification.',
+                'eth-s3-h': 'Calculation:',
+                'eth-s3-p': 'Age and experience are calculated strictly as per notification dates.',
+                'comp-h': 'Compensation & Benefits',
+                'comp-s1-h': 'Scale (AM)',
+                'comp-s1-p': '₹50,000 – ₹1,60,000',
+                'comp-s2-h': 'Merit Bonus',
+                'comp-s2-p': 'Up to 15% enhancement',
+                'comp-s3-h': 'Incentives',
+                'comp-s3-p': 'Performance-linked increments',
+                'comp-s4-h': 'Allowances',
+                'comp-s4-p': 'As per Contract Policy',
+                'check-h': 'Compliance Checklist',
+                'check-p': 'Mandatory documentation includes Birth Proof, Educational Certificates, Community Certificates, and Experience records.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. \nFor career-related inquiries, visit the official KMRL website portal.'
+            },
+            'ml': {
+                'page-h1': 'ഹ്യൂമൻ റിസോഴ്‌സ് (HR)',
+                'page-p': 'യോഗ്യതയിലൂടെയും ധാർമ്മികതയിലൂടെയും ഞങ്ങളുടെ തൊഴിൽ സേനയെ ശാക്തീകരിക്കുന്നു',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-upload': 'രേഖ അപ്‌ലോഡ്',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'policy-h': 'ഞങ്ങളുടെ എച്ച്ആർ പ്രതിബദ്ധത',
+                'policy-p': 'കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ് (KMRL) കരാർ അടിസ്ഥാനത്തിലുള്ള തൊഴിൽ, മെറിറ്റ് അടിസ്ഥാനത്തിലുള്ള റിക്രൂട്ട്‌മെന്റ്, ധാർമ്മിക മാനദണ്ഡങ്ങൾ എന്നിവയ്ക്ക് മുൻഗണന നൽകുന്ന ഘടനാപരമായ ഹ്യൂമൻ റിസോഴ്‌സ് നയങ്ങളാണ് പിന്തുടരുന്നത്.',
+                'recruit-h': 'റിക്രൂട്ട്‌മെന്റും തിരഞ്ഞെടുപ്പും',
+                'recruit-p': 'ഔദ്യോഗിക ചാനലുകൾ വഴി മാത്രമാണ് കെഎംആർഎൽ നേരിട്ടുള്ള റിക്രൂട്ട്‌മെന്റ് നടത്തുന്നത്. അപേക്ഷകൾ ഓൺലൈൻ പോർട്ടൽ വഴി മാത്രമേ സ്വീകരിക്കുകയുള്ളൂ.',
+                'step1-h': 'പൊതു അറിയിപ്പ്:',
+                'step1-p': 'ദേശീയ പത്രങ്ങളിലും ഔദ്യോഗിക വെബ്‌സൈറ്റിലും എല്ലാ ഒഴിവുകളും പ്രസിദ്ധീകരിക്കുന്നു.',
+                'step2-h': 'നിഷ്പക്ഷമായ തിരഞ്ഞെടുപ്പ്:',
+                'step2-p': 'ഷോർട്ട്‌ലിസ്റ്റ് ചെയ്ത ശേഷം എഴുത്തുപരീക്ഷയും ഇന്റർവ്യൂവും നടത്തുന്നു.',
+                'step3-h': 'ആശയവിനിമയം:',
+                'step3-p': 'തിരഞ്ഞെടുക്കപ്പെട്ട ഉദ്യോഗാർത്ഥികളെ മാത്രം ഇമെയിൽ വഴി അറിയിക്കുന്നു.',
+                'warning-box': '⚠️ തട്ടിപ്പ് മുന്നറിയിപ്പ്: KMRL റിക്രൂട്ട്‌മെന്റ് ഔട്ട്‌സോഴ്‌സ് ചെയ്യുന്നില്ല. സോഷ്യൽ മീഡിയയിലെ വ്യാജ പരസ്യങ്ങൾ ശ്രദ്ധിക്കുക.',
+                'tenure-h': 'തൊഴിലും കാലാവധിയും',
+                'tenure-p1': 'തസ്തികകൾ സാധാരണയായി മൂന്ന് വർഷത്തേക്ക് നിശ്ചിത കാലാവധിയിലുള്ള കരാർ അടിസ്ഥാനത്തിലാണ് നൽകുന്നത്.',
+                'tenure-p2': 'ഡയറക്ടർ തസ്തികകൾ പോലുള്ള ഉന്നതതല സ്ഥാനങ്ങൾക്ക് പ്രത്യേക പ്രായപരിധികളുണ്ട്.',
+                'ethics-h': 'പൊതുവായ നിർദ്ദേശങ്ങളും ധാർമ്മികതയും',
+                'eth-s1-h': 'NOC:',
+                'eth-s1-p': 'PSU/ഗവൺമെന്റ് ജീവനക്കാർ നോ ഒബ്ജക്ഷൻ സർട്ടിഫിക്കറ്റ് നൽകണം.',
+                'eth-s2-h': 'ധാർമ്മികത:',
+                'eth-s2-p': 'തിരഞ്ഞെടുപ്പിനെ സ്വാധീനിക്കാൻ ശ്രമിക്കുന്ന ഏതൊരു ശ്രമവും ഉദ്യോഗാർത്ഥിയുടെ അയോഗ്യതയ്ക്ക് കാരണമാകും.',
+                'eth-s3-h': 'കണക്കുകൂട്ടൽ:',
+                'eth-s3-p': 'പ്രായവും പ്രവൃത്തിപരിചയവും വിജ്ഞാപന തീയതികൾ പ്രകാരം മാത്രമേ കണക്കാക്കൂ.',
+                'comp-h': 'ശമ്പളവും മറ്റ് ആനുകൂല്യങ്ങളും',
+                'comp-s1-h': 'ശമ്പള സ്കെയിൽ',
+                'comp-s1-p': '₹50,000 – ₹1,60,000',
+                'comp-s2-h': 'മെറിറ്റ് ബോണസ്',
+                'comp-s2-p': '15% വരെ വർദ്ധനവ്',
+                'comp-s3-h': 'ഇൻസെന്റീവ്',
+                'comp-s3-p': 'പ്രകടനത്തിന് അനുസരിച്ചുള്ള ശമ്പള വർദ്ധനവ്',
+                'comp-s4-h': 'അലവൻസുകൾ',
+                'comp-s4-p': 'കരാർ നയങ്ങൾ പ്രകാരം',
+                'check-h': 'കംപ്ലയൻസ് ചെക്ക്‌ലിസ്റ്റ്',
+                'check-p': 'ജനന സർട്ടിഫിക്കറ്റ്, വിദ്യാഭ്യാസ രേഖകൾ, കമ്മ്യൂണിറ്റി സർട്ടിഫിക്കറ്റ്, അനുഭവ രേഖകൾ എന്നിവ നിർബന്ധമാണ്.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. \nഔദ്യോഗിക KMRL വെബ്സൈറ്റ് പോർട്ടൽ സന്ദർശിക്കുക.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+
+            // Special handling for anti-fraud warning
+            const warnBox = document.getElementById('warning-box');
+            if (warnBox && lang === 'ml') {
+                warnBox.innerHTML = `<strong>⚠️ തട്ടിപ്പ് മുന്നറിയിപ്പ്:</strong> ${t['warning-box'].replace('⚠️ തട്ടിപ്പ് മുന്നറിയിപ്പ്:', '')}`;
+            } else if (warnBox && lang === 'en') {
+                warnBox.innerHTML = `<strong>⚠️ Anti-Fraud Warning:</strong> ${t['warning-box'].replace('⚠️ Anti-Fraud Warning:', '')}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments & Documents - Kochi Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Enhanced Navigation Bar */
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f9;
+            position: relative;
+            min-height: 100vh;
+            /* Added background image logic here for blur control */
+            background-image: url("metro12.webp");
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        /* The Blur Effect Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(8px);
+            /* Adjust the pixels to increase/decrease blur */
+            z-index: -1;
+            /* Keeps it behind the content */
+            transform: scale(1.1);
+            /* Prevents white edges caused by blur */
+        }
+
+        /* Hero & Header */
+        .hero {
+            background-color: rgba(0, 82, 155, 0.9);
+            /* Slight transparency for glass effect */
+            color: white;
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        /* Navigation */
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Area */
+        .content {
+            text-align: center;
+            padding: 50px 20px;
+            padding-bottom: 100px;
+            /* Added space for footer */
+        }
+
+        .content h2 {
+            color: #00529b;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Card Styling */
+        .card {
+            background: rgba(238, 245, 255, 0.9);
+            /* Added slight transparency */
+            border: 1.5px solid #00529b;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .img-box {
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card a {
+            color: #00529b;
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #00529b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar {
+            margin-top: 20px;
+            padding: 10px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .navbar li {
+            display: inline-block;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .navbar a.active {
+            background-color: white;
+            color: #00529b;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                position: relative;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .content {
+                padding: 30px 15px;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1 id="page-h1">Departments & Documents</h1>
+            <p id="page-p">Explore Our Operational Divisions & Document Categories</p>
+        </div>
+        <nav class="navbar">
+            <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+            <ul id="nav-list">
+                <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+                <li><a href="about.html" id="nav-about">About Us</a></li>
+                <li><a href="dep.html" id="nav-dep">Departments</a></li>
+                <li><a href="login.html" id="nav-upload">Document Upload</a></li>
+                <li><a href="contact.html" id="nav-contact">Contact</a></li>
+                <li><a href="login.html" id="nav-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <h2 style="color: black;" id="cat-h2">Document Categories</h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="img-box"><img src="eng.webp" alt="Engineering"></div>
+                <a href="engineer.html" id="cat-eng">Engineer Drawings</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="main.webp" alt="Maintenance"></div>
+                <a href="maintain.html" id="cat-main">Maintenance</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="i.jpg" alt="Incident"></div>
+                <a href="inc.html" id="cat-inc">Incident Report</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="vendor invoice.jpg" alt="Vendor"></div>
+                <a href="vendor.html" id="cat-vend">Vendor Invoice</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="hr.webp" alt="HR"></div>
+                <a href="hr.html" id="cat-hr">HR Policies</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="eni.jpg" alt="Environmental"></div>
+                <a href="ei.html" id="cat-env">Environmental Impact</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="safety.webp" alt="Safety"></div>
+                <a href="sc.html" id="cat-safe">Safety Circular</a>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="regdir.webp" alt="Regulatory"></div>
+                <a href="regdir.html" id="cat-reg">Regulatory Director</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2025 Kochi Metro Rail Limited. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Departments & Documents',
+                'page-p': 'Explore Our Operational Divisions & Document Categories',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-upload': 'Document Upload',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'cat-h2': 'Document Categories',
+                'cat-eng': 'Engineer Drawings',
+                'cat-main': 'Maintenance',
+                'cat-inc': 'Incident Report',
+                'cat-vend': 'Vendor Invoice',
+                'cat-hr': 'HR Policies',
+                'cat-env': 'Environmental Impact',
+                'cat-safe': 'Safety Circular',
+                'cat-reg': 'Regulatory Director',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. All rights reserved.'
+            },
+            'ml': {
+                'page-h1': 'വകുപ്പുകളും രേഖകളും',
+                'page-p': 'ഞങ്ങളുടെ പ്രവർത്തന വിഭാഗങ്ങളും രേഖകളും ഇവിടെ കാണാം',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-upload': 'രേഖ അപ്‌ലോഡ്',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'cat-h2': 'രേഖകളുടെ വിഭാഗങ്ങൾ',
+                'cat-eng': 'എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകൾ',
+                'cat-main': 'അറ്റകുറ്റപ്പണി',
+                'cat-inc': 'ഇൻസിഡന്റ് റിപ്പോർട്ട്',
+                'cat-vend': 'വെണ്ടർ ഇൻവോയ്സ്',
+                'cat-hr': 'എച്ച്ആർ നയങ്ങൾ',
+                'cat-env': 'പരിസ്ഥിതി ആഘാതം',
+                'cat-safe': 'സുരക്ഷാ സർക്കുലർ',
+                'cat-reg': 'റെഗുലേറ്ററി ഡയറക്ടർ',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            // Header & Content
+            document.getElementById('page-h1').innerText = t['page-h1'];
+            document.getElementById('page-p').innerText = t['page-p'];
+            document.getElementById('cat-h2').innerText = t['cat-h2'];
+            document.getElementById('footer-text').innerText = t['footer-text'];
+
+            // Navigation
+            document.getElementById('nav-dash').innerText = t['nav-dash'];
+            document.getElementById('nav-about').innerText = t['nav-about'];
+            document.getElementById('nav-dep').innerText = t['nav-dep'];
+            document.getElementById('nav-upload').innerText = t['nav-upload'];
+            document.getElementById('nav-contact').innerText = t['nav-contact'];
+            document.getElementById('nav-login').innerText = t['nav-login'];
+
+            // Category Links
+            document.getElementById('cat-eng').innerText = t['cat-eng'];
+            document.getElementById('cat-main').innerText = t['cat-main'];
+            document.getElementById('cat-inc').innerText = t['cat-inc'];
+            document.getElementById('cat-vend').innerText = t['cat-vend'];
+            document.getElementById('cat-hr').innerText = t['cat-hr'];
+            document.getElementById('cat-env').innerText = t['cat-env'];
+            document.getElementById('cat-safe').innerText = t['cat-safe'];
+            document.getElementById('cat-reg').innerText = t['cat-reg'];
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

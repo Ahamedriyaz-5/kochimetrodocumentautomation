@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer Drawings | Kochi Metro Rail Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Hero & Header */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .header-bg h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .header-bg p {
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Modern Navigation Bar */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar a.active {
+            background-color: white;
+            color: #00529b;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 6px solid #00529b;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: #1e293b;
+        }
+
+        /* Two Column Layout */
+        .grid-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            align-items: center;
+        }
+
+        .image-box {
+            background: white;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Types of Drawings Grid */
+        .drawing-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .type-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #00529b;
+        }
+
+        .type-card h4 {
+            color: #00529b;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        /* Lifecycle Section */
+        .lifecycle-banner {
+            background: linear-gradient(135deg, #00529b 0%, #003d74 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 50px 0;
+        }
+
+        .lifecycle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .step-item b {
+            display: block;
+            margin-bottom: 5px;
+            color: #60a5fa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background: #00529b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+
+            .grid-split,
+            .lifecycle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Departments & Documents</h1>
+        <p id="page-p">Explore Our Operational Divisions & Document Categories</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep" class="active">Departments</a></li>
+
+            <li><a href="login.html" id="nav-upload">Document Upload</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="intro-section">
+            <p id="intro-p">Engineering drawings in metro systems are detailed technical documents that visually
+                represent the
+                design, layout, and specifications necessary for constructing, operating, and maintaining metro
+                infrastructure.</p>
+        </section>
+
+        <div class="grid-split">
+            <div class="content-text">
+                <h2 style="color:#00529b; margin-bottom: 15px;" id="purpose-h">Purpose of Engineering Drawings</h2>
+                <p id="purpose-p">Engineering drawings serve as the foundation for communication among engineers,
+                    architects,
+                    contractors, and operators. They convey precise measurements, materials, structural designs, system
+                    layouts, and installation details, ensuring that every aspect of the metro project is implemented as
+                    intended.</p>
+            </div>
+            <div class="image-box">
+
+                <img src="eng.webp" alt="">
+            </div>
+        </div>
+
+        <h2 style="text-align: center; color:#00529b; margin-bottom: 30px;" id="types-h">Types of Metro Engineering
+            Drawings</h2>
+        <div class="drawing-types">
+            <div class="type-card">
+                <h4>Civil Drawings</h4>
+                <p>Plans for tunnels, elevated viaducts, stations, retaining walls, and foundations. Critical for
+                    construction site layouts.</p>
+            </div>
+            <div class="type-card">
+                <h4>Structural Drawings</h4>
+                <p>Focused on load-bearing elements like beams, columns, and platforms. Provides specs for reinforcement
+                    and sequencing.</p>
+            </div>
+            <div class="type-card">
+                <h4>Architectural Drawings</h4>
+                <p>Illustrate station aesthetics, passenger flow, entry/exit points, and concourse layouts to ensure
+                    functional designs.</p>
+            </div>
+            <div class="type-card">
+                <h4>Electrical Drawings</h4>
+                <p>Layouts for power supply, lighting, signal systems, and traction systems, ensuring safe operations.
+                </p>
+            </div>
+            <div class="type-card">
+                <h4>Mechanical Drawings</h4>
+                <p>Cover ventilation, escalators, elevators, fire-fighting installations, and HVAC specifications.</p>
+            </div>
+            <div class="type-card">
+                <h4>Signaling & Telecom</h4>
+                <p>Details for track signaling, interlocking systems, train control, surveillance, and announcement
+                    systems.</p>
+            </div>
+        </div>
+
+        <section class="lifecycle-banner">
+            <h3 id="life-h">Role in Project Lifecycle</h3>
+            <p id="life-p">Engineering drawings are the blueprint that ensures complex systems operate reliably through
+                every phase:
+            </p>
+            <div class="lifecycle-grid">
+                <div class="step-item">
+                    <b id="life-s1-h">01. Design Stage</b>
+                    <span id="life-s1-p">Conceptual and detailed designs are drafted to set the project
+                        foundation.</span>
+                </div>
+                <div class="step-item">
+                    <b id="life-s2-h">02. Construction</b>
+                    <span id="life-s2-p">Drawings guide contractors in building tunnels and installing critical
+                        systems.</span>
+                </div>
+                <div class="step-item">
+                    <b id="life-s3-h">03. Maintenance</b>
+                    <span id="life-s3-p">As-built drawings provide references for future repairs, upgrades, or
+                        expansions.</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. All rights reserved.
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Departments & Documents',
+                'page-p': 'Explore Our Operational Divisions & Document Categories',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Document',
+                'nav-upload': 'Document Upload',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'intro-p': 'Engineering drawings in metro systems are detailed technical documents that visually represent the design, layout, and specifications necessary for constructing, operating, and maintaining metro infrastructure.',
+                'purpose-h': 'Purpose of Engineering Drawings',
+                'purpose-p': 'Engineering drawings serve as the foundation for communication among engineers, architects, contractors, and operators. They convey precise measurements, materials, structural designs, system layouts, and installation details, ensuring that every aspect of the metro project is implemented as intended.',
+                'types-h': 'Types of Metro Engineering Drawings',
+                'life-h': 'Role in Project Lifecycle',
+                'life-p': 'Engineering drawings are the blueprint that ensures complex systems operate reliably through every phase:',
+                'life-s1-h': '01. Design Stage',
+                'life-s1-p': 'Conceptual and detailed designs are drafted to set the project foundation.',
+                'life-s2-h': '02. Construction',
+                'life-s2-p': 'Drawings guide contractors in building tunnels and installing critical systems.',
+                'life-s3-h': '03. Maintenance',
+                'life-s3-p': 'As-built drawings provide references for future repairs, upgrades, or expansions.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. All rights reserved.'
+            },
+            'ml': {
+                'page-h1': 'വകുപ്പുകളും രേഖകളും',
+                'page-p': 'ഞങ്ങളുടെ പ്രവർത്തന വിഭാഗങ്ങളും രേഖകളും ഇവിടെ കാണാം',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-upload': 'രേഖ അപ്‌ലോഡ്',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'intro-p': 'മെട്രോ അടിസ്ഥാന സൗകര്യങ്ങൾ നിർമ്മിക്കുന്നതിനും പ്രവർത്തിപ്പിക്കുന്നതിനും പരിപാലിക്കുന്നതിനും ആവശ്യമായ രൂപകൽപ്പന, ലേഔട്ട്, സ്പെസിഫിക്കേഷനുകൾ എന്നിവയെ ദൃശ്യപരമായി പ്രതിനിധീകരിക്കുന്ന വിശദമായ സാങ്കേതിക രേഖകളാണ് മെട്രോ സിസ്റ്റങ്ങളിലെ എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകൾ.',
+                'purpose-h': 'എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകളുടെ ഉദ്ദേശ്യം',
+                'purpose-p': 'എഞ്ചിനീയർമാർ, ആർക്കിടെക്റ്റുകൾ, കരാറുകാർ, ഓപ്പറേറ്റർമാർ എന്നിവർക്കിടയിലുള്ള ആശയവിനിമയത്തിന്റെ അടിസ്ഥാനമായി എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകൾ വർത്തിക്കുന്നു. അവ കൃത്യമായ അളവുകൾ, വസ്തുക്കൾ, ഘടനാപരമായ രൂപകൽപ്പനകൾ, സിസ്റ്റം ലേഔട്ടുകൾ, ഇൻസ്റ്റാളേഷൻ വിശദാംശങ്ങൾ എന്നിവ അറിയിക്കുന്നു.',
+                'types-h': 'മെട്രോ എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകളുടെ തരങ്ങൾ',
+                'life-h': 'പ്രോജക്റ്റ് ലൈഫ് സൈക്കിളിലെ പങ്ക്',
+                'life-p': 'ഓരോ ഘട്ടത്തിലും സങ്കീർണ്ണമായ സംവിധാനങ്ങൾ വിശ്വസനീയമായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കുന്ന ബ്ലൂപ്രിന്റാണ് എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകൾ:',
+                'life-s1-h': '01. ഡിസൈൻ ഘട്ടം',
+                'life-s1-p': 'പ്രോജക്റ്റ് അടിത്തറ സജ്ജമാക്കുന്നതിന് കൺസെപ്ച്വൽ, വിശദമായ ഡിസൈനുകൾ തയ്യാറാക്കുന്നു.',
+                'life-s2-h': '02. നിർമ്മാണം',
+                'life-s2-p': 'ടണലുകൾ നിർമ്മിക്കുന്നതിനും നിർണ്ണായക സംവിധാനങ്ങൾ സ്ഥാപിക്കുന്നതിനും ഡ്രോയിംഗുകൾ കരാറുകാരെ നയിക്കുന്നു.',
+                'life-s3-h': '03. അറ്റകുറ്റപ്പണി',
+                'life-s3-p': 'ഭാവിയിലെ അറ്റകുറ്റപ്പണികൾക്കോ ​​നവീകരണങ്ങൾക്കോ ​​വിപുലീകരണങ്ങൾക്കോ ​​വേണ്ടിയുള്ള റഫറൻസുകൾ ഡ്രോയിംഗുകൾ നൽകുന്നു.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+
+            // Special handling for the active nav item
+            const navDep = document.getElementById('nav-dep');
+            if (navDep) navDep.innerText = t['nav-dep'];
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+
+</body>
+
+</html>

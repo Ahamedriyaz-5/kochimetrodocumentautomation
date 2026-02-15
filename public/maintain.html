@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance | Kochi Metro Rail Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header & Hero */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .header-bg h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        /* Modern Navigation Bar */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar a.active {
+            background-color: white;
+            color: #00529b;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-banner {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 6px solid #22c55e;
+            /* Green for maintenance/health */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        /* Content Layout */
+        .grid-split {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            align-items: flex-start;
+        }
+
+        .image-box {
+            background: white;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        /* Maintenance Type Cards */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .type-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-bottom: 4px solid #00529b;
+            transition: transform 0.3s ease;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .type-card h4 {
+            color: #00529b;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Tech Section */
+        .tech-section {
+            background: #f1f5f9;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .tech-item h5 {
+            color: #00529b;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: #00529b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-split,
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Operations & Maintenance</h1>
+        <p id="page-p">Ensuring Infrastructure Reliability through Modern Technology</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep" class="active">Departments</a></li>
+            <li><a href="login.html" id="nav-upload">Document Upload</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="intro-banner">
+            <p id="intro-p">Effective metro system maintenance ensures safety, reliability, and efficiency, combining
+                preventive,
+                corrective, predictive, and condition-based strategies with modern technologies like AI and CMMS
+                systems.</p>
+        </section>
+
+        <div class="grid-split">
+            <div>
+                <h2 style="color:#00529b; margin-bottom: 15px;" id="imp-h">Importance of Metro Maintenance</h2>
+                <p id="imp-p">Maintenance in metro systems is crucial to guarantee passenger safety, minimize
+                    breakdowns, and
+                    extend the lifespan of infrastructure and rolling stock. Proper maintenance reduces downtime and
+                    overall life-cycle costs compared to replacing failed equipment. Well-executed programs improve
+                    reliability and passenger comfort while ensuring compliance with safety and regulatory standards.
+                </p>
+
+                <h2 style="color:#00529b; margin-top: 30px; margin-bottom: 15px;" id="strat-h">Maintenance Strategies
+                </h2>
+                <p id="strat-p">Metro maintenance is generally classified into four main methodologies to ensure 100%
+                    operational
+                    readiness.</p>
+            </div>
+
+            <div class="image-box">
+
+                <img src="main.webp" alt="">
+            </div>
+        </div>
+
+        <div class="types-grid">
+            <div class="type-card">
+                <h4 id="type1-h">Preventive</h4>
+                <p id="type1-p">Routine inspections, cleaning, and lubrication performed on a set schedule to prevent
+                    failures.</p>
+            </div>
+            <div class="type-card">
+                <h4 id="type2-h">Corrective</h4>
+                <p id="type2-p">Repair or replacement of equipment after detecting a fault or failure to restore
+                    service.</p>
+            </div>
+            <div class="type-card">
+                <h4 id="type3-h">Predictive</h4>
+                <p id="type3-p">Using sensors and data analytics to forecast failures before they occur for timely
+                    intervention.</p>
+            </div>
+            <div class="type-card">
+                <h4 id="type4-h">Condition-Based</h4>
+                <p id="type4-p">Maintenance triggered by real-time continuous monitoring of asset health and
+                    performance.</p>
+            </div>
+        </div>
+
+        <section class="tech-section">
+            <h2 style="color:#00529b;" id="tech-h">Technological Advancements</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h5 id="tech1-h">AI & IoT Integration</h5>
+                    <p id="tech1-p">AI-powered systems analyze sensor data from tracks and trains to anticipate failures
+                        and optimize
+                        schedules. Deep reinforcement learning dynamicallly adjusts operations based on real-time
+                        conditions.</p>
+                </div>
+                <div class="tech-item">
+                    <h5 id="tech2-h">CMMS & Asset Management</h5>
+                    <p id="tech2-p">Systems like IBM Maximo or CARL Source track asset conditions, generate automated
+                        work orders,
+                        and maintain accurate records to reduce manual paperwork and human error.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. All rights reserved.
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Operations & Maintenance',
+                'page-p': 'Ensuring Infrastructure Reliability through Modern Technology',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Document',
+                'nav-upload': 'Document Upload',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'intro-p': 'Effective metro system maintenance ensures safety, reliability, and efficiency, combining preventive, corrective, predictive, and condition-based strategies with modern technologies like AI and CMMS systems.',
+                'imp-h': 'Importance of Metro Maintenance',
+                'imp-p': 'Maintenance in metro systems is crucial to guarantee passenger safety, minimize breakdowns, and extend the lifespan of infrastructure and rolling stock. Proper maintenance reduces downtime and overall life-cycle costs compared to replacing failed equipment.',
+                'strat-h': 'Maintenance Strategies',
+                'strat-p': 'Metro maintenance is generally classified into four main methodologies to ensure 100% operational readiness.',
+                'type1-h': 'Preventive',
+                'type1-p': 'Routine inspections, cleaning, and lubrication performed on a set schedule to prevent failures.',
+                'type2-h': 'Corrective',
+                'type2-p': 'Repair or replacement of equipment after detecting a fault or failure to restore service.',
+                'type3-h': 'Predictive',
+                'type3-p': 'Using sensors and data analytics to forecast failures before they occur for timely intervention.',
+                'type4-h': 'Condition-Based',
+                'type4-p': 'Maintenance triggered by real-time continuous monitoring of asset health and performance.',
+                'tech-h': 'Technological Advancements',
+                'tech1-h': 'AI & IoT Integration',
+                'tech1-p': 'AI-powered systems analyze sensor data from tracks and trains to anticipate failures and optimize schedules.',
+                'tech2-h': 'CMMS & Asset Management',
+                'tech2-p': 'Systems like IBM Maximo or CARL Source track asset conditions and generate work orders.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. All rights reserved.'
+            },
+            'ml': {
+                'page-h1': 'ഓപ്പറേറ്റൻസ് & മെയിന്റനൻസ്',
+                'page-p': 'ആധുനിക സാങ്കേതികവിദ്യയിലൂടെ അടിസ്ഥാന സൗകര്യങ്ങളുടെ വിശ്വാസ്യത ഉറപ്പാക്കുന്നു',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-upload': 'രേഖ അപ്‌ലോഡ്',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'intro-p': 'ഫലപ്രദമായ മെട്രോ സിസ്റ്റം മെയിന്റനൻസ് സുരക്ഷ, വിശ്വാസ്യത, കാര്യക്ഷമത എന്നിവ ഉറപ്പാക്കുന്നു, പ്രിവന്റീവ്, കറക്റ്റീവ്, പ്രെഡിക്റ്റീവ്, കണ്ടീഷൻ അധിഷ്ഠിത സ്ട്രാറ്റജികൾ ആധുനിക സാങ്കേതികവിദ്യകളുമായി സംയോജിപ്പിക്കുന്നു.',
+                'imp-h': 'മെട്രോ അറ്റകുറ്റപ്പണിയുടെ പ്രാധാന്യം',
+                'imp-p': 'യാത്രക്കാരുടെ സുരക്ഷ ഉറപ്പാക്കുന്നതിനും തകരാറുകൾ കുറയ്ക്കുന്നതിനും ഇൻഫ്രാസ്ട്രക്ചറിന്റെയും റോളിംഗ് സ്റ്റോക്കിന്റെയും ആയുസ്സ് വർദ്ധിപ്പിക്കുന്നതിനും മെട്രോ സിസ്റ്റങ്ങളിലെ അറ്റകുറ്റപ്പണികൾ നിർണ്ണായകമാണ്.',
+                'strat-h': 'മെയിന്റനൻസ് സ്ട്രാറ്റജികൾ',
+                'strat-p': 'മെട്രോ അറ്റകുറ്റപ്പണികൾ പൊതുവെ 100% പ്രവർത്തന സജ്ജത ഉറപ്പാക്കുന്നതിനായി നാല് പ്രധാന രീതികളായി തിരിച്ചിരിക്കുന്നു.',
+                'type1-h': 'പ്രിവന്റീവ്',
+                'type1-p': 'പരാജയങ്ങൾ തടയുന്നതിനായി ഒരു നിശ്ചിത ഷെഡ്യൂളിൽ നടത്തുന്ന പതിവ് പരിശോധനകൾ, വൃത്തിയാക്കൽ, ലൂബ്രിക്കേഷൻ.',
+                'type2-h': 'കറക്റ്റീവ്',
+                'type2-p': 'സേവനം പുനഃസ്ഥാപിക്കുന്നതിനായി ഒരു തകരാറോ പരാജയമോ കണ്ടെത്തിയ ശേഷം ഉപകരണങ്ങളുടെ അറ്റകുറ്റപ്പണികൾ അല്ലെങ്കിൽ മാറ്റിസ്ഥാപിക്കൽ.',
+                'type3-h': 'പ്രെഡിക്റ്റീവ്',
+                'type3-p': 'കൃത്യസമയത്ത് ഇടപെടുന്നതിനായി പരാജയങ്ങൾ സംഭവിക്കുന്നതിന് മുമ്പ് അവ പ്രവചിക്കാൻ സെൻസറുകളും ഡാറ്റ അനലിറ്റിക്സും ഉപയോഗിക്കുന്നു.',
+                'type4-h': 'കണ്ടീഷൻ-ബേസ്ഡ്',
+                'type4-p': 'ആസ്തിയുടെ ആരോഗ്യത്തിന്റെയും പ്രകടനത്തിന്റെയും തത്സമയ നിരന്തരമായ നിരീക്ഷണത്തിലൂടെ അറ്റകുറ്റപ്പണികൾ നടത്തുന്നു.',
+                'tech-h': 'സാങ്കേതിക പുരോഗതികൾ',
+                'tech1-h': 'AI & IoT സംയോജനം',
+                'tech1-p': 'AI-അധിഷ്ഠിത സംവിധാനങ്ങൾ സെൻസർ ഡാറ്റ വിശകലനം ചെയ്ത് പരാജയങ്ങൾ മുൻകൂട്ടി കാണുകയും ഷെഡ്യൂളുകൾ ഒപ്റ്റിമൈസ് ചെയ്യുകയും ചെയ്യുന്നു.',
+                'tech2-h': 'CMMS & അസറ്റ് മാനേജ്‌മെന്റ്',
+                'tech2-p': 'IBM Maximo അല്ലെങ്കിൽ CARL Source പോലുള്ള സിസ്റ്റങ്ങൾ അസറ്റ് അവസ്ഥകൾ ട്രാക്ക് ചെയ്യുകയും വർക്ക് ഓർഡറുകൾ തയ്യാറാക്കുകയും ചെയ്യുന്നു.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

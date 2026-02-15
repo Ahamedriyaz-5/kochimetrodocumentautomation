@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Invoicing | Kochi Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .navbar a.active {
+            background-color: #a855f7;
+            /* Purple for Vendors */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .grid-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Left Column Content */
+        .main-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .intro-lead {
+            font-size: 1.1rem;
+            color: #00529b;
+            font-weight: 500;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .checklist-section h3 {
+            margin: 25px 0 15px;
+            color: #1e293b;
+        }
+
+        .guideline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .icon-bullet {
+            color: #00529b;
+            font-weight: bold;
+        }
+
+        /* Right Column Sidebar */
+        .sidebar-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gst-box {
+            background: #00529b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .gst-number {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .doc-image-box {
+            background: white;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .doc-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* Practical Steps Banner */
+        .steps-container {
+            grid-column: span 2;
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Vendor Portal</h1>
+        <p id="page-p">Invoicing Guidelines & GST Compliance Requirements</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> Menu</div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep" class="active">Departments</a></li>
+            <li><a href="document.html" id="nav-doc">Document</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <main class="main-card">
+            <p class="intro-lead" id="intro-p">Kochi Metro Rail Ltd (KMRL) requires vendors to submit GST-compliant
+                invoices with
+                proper documentation to ensure timely payment processing.</p>
+
+            <section class="checklist-section">
+                <h3 id="guide-h">GST and Invoice Guidelines</h3>
+
+                <div class="guideline-item">
+                    <span class="icon-bullet">✓</span>
+                    <div>
+                        <strong id="guide1-h">GST Compliance:</strong>
+                        <span id="guide1-p">Invoices must indicate both the bidder’s GSTIN and KMRL’s GSTIN. KMRL
+                            reimburses GST at actuals based on the submitted invoice.</span>
+                    </div>
+                </div>
+
+                <div class="guideline-item">
+                    <span class="icon-bullet">✓</span>
+                    <div>
+                        <strong id="guide2-h">Contract Pricing:</strong>
+                        <span id="guide2-p">The total price should include all taxes, duties, insurance, freight, and
+                            labor. Prices are firm unless specified in the tender.</span>
+                    </div>
+                </div>
+
+                <div class="guideline-item">
+                    <span class="icon-bullet">✓</span>
+                    <div>
+                        <strong id="guide3-h">Proof of Compliance:</strong>
+                        <span id="guide3-p">Vendors must submit a copy of the latest filed <strong>GSTR1
+                                return</strong>. Failure to comply can result in the recovery of denied input
+                            credit.</span>
+                    </div>
+                </div>
+
+                <div class="guideline-item">
+                    <span class="icon-bullet">✓</span>
+                    <div>
+                        <strong id="guide4-h">Documentation & Language:</strong>
+                        <span id="guide4-p">Invoices and technical bids must be in English. Supporting documents in
+                            other languages require certified translations.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="checklist-section">
+                <h3 id="auth-h">Authorization</h3>
+                <p id="auth-p">Only authorized persons with valid power of attorney or corporate board resolution can
+                    sign billing
+                    documents. Authorized dealers require a tender-specific manufacturer authorization letter.</p>
+            </section>
+        </main>
+
+        <aside class="sidebar-panel">
+            <div class="gst-box">
+                <p id="gst-label">KMRL GSTIN NUMBER</p>
+                <span class="gst-number">32AAECK5274H1ZL</span>
+            </div>
+
+            <div class="doc-image-box">
+
+                <img src="vendor invoice.jpg" alt="">
+            </div>
+        </aside>
+
+        <div class="steps-container">
+            <h3 id="steps-h">Practical Steps for Efficient Payment</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <strong id="step1-h">1. Verify Details</strong><br>
+                    <span id="step1-p">Ensure contract references and GSTINs are 100% accurate before submission.</span>
+                </div>
+                <div class="step-card">
+                    <strong id="step2-h">2. Digital Upload</strong><br>
+                    <span id="step2-p">Submit copies via the GeM or relevant eProcurement portal as per
+                        instructions.</span>
+                </div>
+                <div class="step-card">
+                    <strong id="step3-h">3. Attach Filings</strong><br>
+                    <span id="step3-p">Always include your latest GSTR1 return to avoid credit-related delays.</span>
+                </div>
+                <div class="step-card">
+                    <strong id="step4-h">4. Track Milestones</strong><br>
+                    <span id="step4-p">Align invoice submission with LOA milestones or performance certificates.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. <br>
+        Vendor Support Portal: support@kmrl.co.in
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Vendor Portal',
+                'page-p': 'Invoicing Guidelines & GST Compliance Requirements',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Documents',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'intro-p': 'Kochi Metro Rail Ltd (KMRL) requires vendors to submit GST-compliant invoices with proper documentation to ensure timely payment processing.',
+                'guide-h': 'GST and Invoice Guidelines',
+                'guide1-h': 'GST Compliance:',
+                'guide1-p': 'Invoices must indicate both the bidder’s GSTIN and KMRL’s GSTIN. KMRL reimburses GST at actuals based on the submitted invoice.',
+                'guide2-h': 'Contract Pricing:',
+                'guide2-p': 'The total price should include all taxes, duties, insurance, freight, and labor. Prices are firm unless specified in the tender.',
+                'guide3-h': 'Proof of Compliance:',
+                'guide3-p': 'Vendors must submit a copy of the latest filed GSTR1 return. Failure to comply can result in the recovery of denied input credit.',
+                'guide4-h': 'Documentation & Language:',
+                'guide4-p': 'Invoices and technical bids must be in English. Supporting documents in other languages require certified translations.',
+                'auth-h': 'Authorization',
+                'auth-p': 'Only authorized persons with valid power of attorney or corporate board resolution can sign billing documents.',
+                'gst-label': 'KMRL GSTIN NUMBER',
+                'steps-h': 'Practical Steps for Efficient Payment',
+                'step1-h': '1. Verify Details',
+                'step1-p': 'Ensure contract references and GSTINs are 100% accurate before submission.',
+                'step2-h': '2. Digital Upload',
+                'step2-p': 'Submit copies via the GeM or relevant eProcurement portal as per instructions.',
+                'step3-h': '3. Attach Filings',
+                'step3-p': 'Always include your latest GSTR1 return to avoid credit-related delays.',
+                'step4-h': '4. Track Milestones',
+                'step4-p': 'Align invoice submission with LOA milestones or performance certificates.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. \nVendor Support Portal: support@kmrl.co.in'
+            },
+            'ml': {
+                'page-h1': 'വെണ്ടർ പോർട്ടൽ',
+                'page-p': 'ഇൻവോയ്സിംഗ് മാർഗ്ഗനിർദ്ദേശങ്ങളും ജിഎസ്ടി കംപ്ലയൻസ് ആവശ്യകതകളും',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'intro-p': 'കൃത്യസമയത്ത് പെയ്മെന്റ് പ്രോസസ്സിംഗ് ഉറപ്പാക്കുന്നതിന് വെണ്ടർമാർ ശരിയായ രേഖകളോടെ ജിഎസ്ടി കംപ്ലയന്റ് ഇൻവോയ്സുകൾ സമർപ്പിക്കേണ്ടതുണ്ട്.',
+                'guide-h': 'ജിഎസ്ടി, ഇൻവോയ്സ് മാർഗ്ഗനിർദ്ദേശങ്ങൾ',
+                'guide1-h': 'ജിഎസ്ടി കംപ്ലയൻസ്:',
+                'guide1-p': 'ഇൻവോയ്സുകളിൽ ബിഡ്ഡറുടെ GSTIN-ഉം KMRL-ന്റെ GSTIN-ഉം രേഖപ്പെടുത്തിയിരിക്കണം.',
+                'guide2-h': 'കരാർ വില:',
+                'guide2-p': 'മൊത്തം വിലയിൽ എല്ലാ നികുതികളും, ഇൻഷുറൻസ്, ഫ്രൈറ്റ്, ലേബർ എന്നിവ ഉൾപ്പെട്ടിരിക്കണം.',
+                'guide3-h': 'പാലിക്കൽ തെളിവ്:',
+                'guide3-p': 'വെണ്ടർമാർ ഏറ്റവും പുതിയ GSTR1 റിട്ടേണിന്റെ പകർപ്പ് സമർപ്പിക്കണം. ഇത് പാലിക്കുന്നതിൽ പരാജയപ്പെടുന്നത് ഇൻപുട്ട് ക്രെഡിറ്റ് റിക്കവറിക്ക് കാരണമാകും.',
+                'guide4-h': 'ഡോക്യുമെന്റേഷനും ഭാഷയും:',
+                'guide4-p': 'ഇൻവോയ്സുകളും ടെക്നിക്കൽ ബിഡുകളും ഇംഗ്ലീഷിലായിരിക്കണം. മറ്റ് ഭാഷകളിലുള്ള രേഖകൾക്ക് സാക്ഷ്യപ്പെടുത്തിയ വിവർത്തനം ആവശ്യമാണ്.',
+                'auth-h': 'അധികാരപ്പെടുത്തൽ',
+                'auth-p': 'സാധുവായ പവർ ഓഫ് അറ്റോർണി ഉള്ള അംഗീകൃത വ്യക്തികൾക്ക് മാത്രമേ ബില്ലിംഗ് രേഖകളിൽ ഒപ്പിടാൻ കഴിയൂ.',
+                'gst-label': 'KMRL GSTIN നമ്പർ',
+                'steps-h': 'കാര്യക്ഷമമായ പെയ്മെന്റിനുള്ള നടപടികൾ',
+                'step1-h': '1. വിവരങ്ങൾ പരിശോധിക്കുക',
+                'step1-p': 'സമർപ്പിക്കുന്നതിന് മുമ്പ് കരാർ റഫറൻസുകളും GSTIN-കളും 100% കൃത്യമാണെന്ന് ഉറപ്പാക്കുക.',
+                'step2-h': '2. ഡിജിറ്റൽ അപ്‌ലോഡ്',
+                'step2-p': 'നിർദ്ദേശങ്ങൾ അനുസരിച്ച് GeM അല്ലെങ്കിൽ ഇ-പ്രൊക്യുർമെന്റ് പോർട്ടൽ വഴി കോപ്പികൾ സമർപ്പിക്കുക.',
+                'step3-h': '3. ഫയലിംഗുകൾ അറ്റാച്ചുചെയ്യുക',
+                'step3-p': 'ക്രെഡിറ്റുമായി ബന്ധപ്പെട്ട കാലതാമസം ഒഴിവാക്കാൻ എപ്പോഴും പുതിയ GSTR1 റിട്ടേൺ ഉൾപ്പെടുത്തുക.',
+                'step4-h': '4. നാഴികക്കല്ലുകൾ ട്രാക്ക് ചെയ്യുക',
+                'step4-p': 'LOA നാഴികക്കല്ലുകൾ അല്ലെങ്കിൽ പെർഫോമൻസ് സർട്ടിഫിക്കറ്റുകൾക്ക് അനുസരിച്ച് ഇൻവോയ്സ് സമർപ്പിക്കുക.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. \nവെണ്ടർ സപ്പോർട്ട് പോർട്ടൽ: support@kmrl.co.in'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

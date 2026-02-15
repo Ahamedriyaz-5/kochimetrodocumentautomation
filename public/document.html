@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMRL - Advanced Document Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --kmrl-blue: #005596;
+            --kmrl-green: #76bc21;
+            --bg: #f4f7f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background: var(--bg);
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--kmrl-blue);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Dashboard Stats */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            padding: 2rem 5%;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--kmrl-green);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            color: var(--kmrl-blue);
+            font-size: 2rem;
+        }
+
+        .stat-card p {
+            margin: 5px 0 0;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr 300px;
+            gap: 20px;
+            padding: 2rem 5%;
+            align-items: start;
+        }
+
+        /* History Bar */
+        .history-list {
+            margin-top: 20px;
+        }
+
+        .history-header {
+            font-weight: bold;
+            color: #64748b;
+            padding: 10px 0;
+            border-bottom: 2px solid #edf2f7;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .history-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .history-item .file-name {
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-item .status-label {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* Document Explorer */
+        .explorer-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            background: #f8fafc;
+            padding: 12px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 14px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .tag-tech {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .tag-fin {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* Sidebar - Advanced Features */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--kmrl-blue);
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            background: #eef2ff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-zone:hover {
+            background: #e0e7ff;
+        }
+
+        .btn-action {
+            background: var(--kmrl-blue);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Responsive Styles */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 15px;
+                background: rgba(0, 85, 150, 0.95);
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            /* Statistics on top for mobile? Or keep bottom? Let's keep distinct */
+            .sidebar {
+                margin-bottom: 30px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            select {
+                width: 100%;
+            }
+
+            /* Table adjustments */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                padding: 10px;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                position: absolute;
+                top: 12px;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><strong>KOCHI METRO</strong> | <span id="nav-hub-title">Document Hub</span></div>
+        <div class="menu-toggle" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="in.html" id="nav-dashboard">Dashboard</a>
+            <a href="dep.html" id="nav-dept">Departments</a>
+            <a href="document.html" id="nav-doc">Document</a>
+            <a href="about.html" id="nav-about">About Us</a>
+            <a href="in.html" id="nav-logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <h3>615</h3>
+            <p id="stat-total">Total Documents</p>
+        </div>
+        <div class="stat-card">
+            <h3>10</h3>
+            <p id="stat-active">Active Categories</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="pending-count">42</h3>
+            <p id="stat-pending">Pending Review</p>
+        </div>
+        <div class="stat-card">
+            <h3>95%</h3>
+            <p id="stat-reduction">Paper Reduction</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- History Bar (Left) -->
+        <div class="sidebar">
+            <div class="explorer-card" style="min-height: 500px;">
+                <select id="filterDept"
+                    style="padding: 12px; border-radius: 10px; border: 2px solid #005596; width: 100%; margin-bottom: 25px; font-weight: 600; font-size: 15px;">
+                    <option value="all" id="opt-all">All Departments</option>
+                    <option value="Engineering" id="opt-eng">Engineering Drawings</option>
+                    <option value="Finance" id="opt-fin">Finance</option>
+                    <option value="Operations" id="opt-ops">Operations</option>
+                    <option value="sc" id="opt-safe">Safety Circular</option>
+                    <option value="Marketing" id="opt-env">Environment Impact</option>
+                    <option value="HR" id="opt-hr">HR Policies</option>
+                    <option value="vendor invoice" id="opt-vend">Vendor Invoice</option>
+                    <option value="incident report" id="opt-inc">Incident Report</option>
+                    <option value="Maintenance" id="opt-main">Maintenance</option>
+                    <option value="reg" id="opt-reg">Regulatory Director</option>
+                </select>
+
+                <div class="history-list">
+                    <div class="history-header" id="th-status">Status</div>
+                    <div id="history-items">
+                        <!-- Items will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle: AI Smart Upload -->
+        <div class="main-content-area">
+            <div class="explorer-card" style="padding: 40px; text-align: center;">
+                <h2 id="upload-h" style="color: var(--kmrl-blue); margin-top: 0;">AI Smart Upload</h2>
+                <p style="font-size: 14px; color: #666; margin-bottom: 30px;" id="upload-p">Drag and drop to
+                    auto-classify documents using text analysis.</p>
+
+                <div class="upload-zone" id="drop-zone"
+                    style="height: 250px; border: 2px dashed #005596; background: #f0f7ff; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 12px; transition: 0.3s;">
+                    <i class="fas fa-cloud-upload-alt"
+                        style="font-size: 50px; color: #005596; margin-bottom: 15px;"></i>
+                    <p id="drop-text" style="font-size: 18px; color: #333; font-weight: 600;">Click or Drop PDF</p>
+                    <input type="file" id="fileInput" hidden>
+                </div>
+
+                <button class="btn-action"
+                    style="margin-top: 30px; padding: 15px; font-size: 16px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+                    onclick="simulateUpload()" id="btn-meta">Generate Metadata</button>
+            </div>
+
+            <!-- Optional: You can keep the table here if needed or a collapsed version -->
+        </div>
+
+        <!-- Right: Analytics -->
+        <div class="sidebar">
+            <div class="explorer-card">
+                <h4 id="load-h">Department Load</h4>
+                <div style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="deptChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Project Data Model
+        const documents = [
+            { name: "Phase_2_Blueprints.pdf", dept: "Engineering", hash: "x8821..", status: "Verified" },
+            { name: "Monthly_Audit_Q4.xlsx", dept: "Finance", hash: "a9912..", status: "Pending" },
+            { name: "Safety_Protocol_V3.pdf", dept: "Operations", hash: "b2231..", status: "Verified" },
+            { name: "Rolling_Stock_Invoice.pdf", dept: "Finance", hash: "c4456..", status: "Verified" }
+        ];
+
+        function renderHistory(data) {
+            const historyItems = document.getElementById('history-items');
+            const lang = localStorage.getItem('kmrl_lang') || 'en';
+
+            const filteredData = data || documents;
+
+            historyItems.innerHTML = filteredData.map(doc => {
+                let displayStatus = doc.status;
+                if (lang === 'ml') {
+                    displayStatus = doc.status === 'Verified' ? 'പരിശോധിച്ചു' : 'ബാക്കിയുണ്ട്';
+                }
+
+                return `
+                <div class="history-item">
+                    <div class="file-name" title="${doc.name}">${doc.name}</div>
+                    <div class="status-label" style="color: ${doc.status === 'Verified' ? '#16a34a' : '#ea580c'};">
+                        ${displayStatus}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Filtering Logic
+        document.getElementById('filterDept').addEventListener('change', (e) => {
+            const dept = e.target.value;
+            const filtered = dept === 'all' ? documents : documents.filter(d => d.dept === dept);
+            renderHistory(filtered);
+        });
+
+        // Initialize Drag and Drop
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.background = '#e0e7ff';
+            dropZone.style.borderColor = '#76bc21';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.background = '#f0f7ff';
+            dropZone.style.borderColor = '#005596';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.background = '#f0f7ff';
+            dropZone.style.borderColor = '#005596';
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        function handleFileUpload(file) {
+            const lang = localStorage.getItem('kmrl_lang') || 'en';
+            const fileName = file.name;
+
+            // Auto-classification
+            let dept = "General";
+            if (fileName.toLowerCase().includes("signal") || fileName.toLowerCase().includes("train")) dept = "Engineering";
+            if (fileName.toLowerCase().includes("cost") || fileName.toLowerCase().includes("bill")) dept = "Finance";
+            if (fileName.toLowerCase().includes("safety") || fileName.toLowerCase().includes("rule")) dept = "sc";
+
+            // Current selection
+            const selectedDept = document.getElementById('filterDept').value;
+            if (selectedDept !== 'all') dept = selectedDept;
+
+            // Add to history
+            const newDoc = {
+                name: fileName,
+                dept: dept,
+                hash: "new_" + Math.random().toString(36).substr(2, 5),
+                status: "Pending"
+            };
+
+            documents.unshift(newDoc);
+
+            // Flash success on drop zone
+            dropZone.style.background = '#dcfce7';
+            setTimeout(() => dropZone.style.background = '#f0f7ff', 1000);
+
+            // Re-render based on current filter
+            const filterVal = document.getElementById('filterDept').value;
+            renderHistory(filterVal === 'all' ? documents : documents.filter(d => d.dept === filterVal));
+
+            const successMsg = lang === 'ml' ? `ഫയൽ "${fileName}" അപ്‌ലോഡ് ചെയ്‌തു` : `File "${fileName}" uploaded successfully!`;
+            // alert(successMsg); // Removed alert for smoother experience
+            console.log(successMsg);
+        }
+
+        // Smart Upload Simulation
+        function simulateUpload() {
+            const lang = localStorage.getItem('kmrl_lang') || 'en';
+            const promptMsg = lang === 'ml' ? "ഫയൽനാമം നൽകുക (ഉദാഹരണത്തിന്: Signal_Test.pdf)" : "Enter Filename (e.g., Signal_Test.pdf)";
+            const fileName = prompt(promptMsg);
+            if (!fileName) return;
+
+            // Simple Auto-classification Logic
+            let dept = "General";
+            if (fileName.toLowerCase().includes("signal") || fileName.toLowerCase().includes("train")) dept = "Engineering";
+            if (fileName.toLowerCase().includes("cost") || fileName.toLowerCase().includes("bill")) dept = "Finance";
+
+            documents.unshift({
+                name: fileName,
+                dept: dept,
+                hash: "new_" + Math.random().toString(36).substr(2, 5),
+                status: "Verified"
+            });
+            renderHistory(documents);
+
+            const successMsg = lang === 'ml' ? `രേഖ തരംതിരിച്ചിരിക്കുന്നു: ${dept === 'Engineering' ? 'എഞ്ചിനീയറിംഗ്' : (dept === 'Finance' ? 'ധനകാര്യം' : 'പൊതുവായവ')}` : `Document classified into: ${dept}`;
+            alert(successMsg);
+        }
+
+        // Data Visualization (Analytics)
+        const ctx = document.getElementById('deptChart').getContext('2d');
+        const currentLang = localStorage.getItem('kmrl_lang') || 'en';
+        const chartLabels = currentLang === 'ml' ? ['എഞ്ചിൻ', 'ധനം', 'പ്രവർത്തന'] : ['Eng', 'Fin', 'Ops'];
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    data: [12, 19, 7],
+                    backgroundColor: ['#005596', '#76bc21', '#ffce56']
+                }]
+            },
+            options: { plugins: { legend: { position: 'bottom' } } }
+        });
+
+        renderHistory(documents);
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Language Logic
+        const translations = {
+            'en': {
+                'nav-dashboard': 'Dashboard',
+                'nav-dept': 'Departments',
+                'nav-doc': 'Document',
+                'nav-about': 'About Us',
+                'nav-logout': 'Logout',
+                'nav-hub-title': 'Document Hub',
+                'stat-total': 'Total Documents',
+                'stat-active': 'Active Categories',
+                'stat-pending': 'Pending Review',
+                'stat-reduction': 'Paper Reduction',
+                'searchBar': 'Search by file name, keyword or ID...',
+                'opt-all': 'All Departments',
+                'opt-eng': 'Engineering Drawings',
+                'opt-safe': 'Safety Circular',
+                'opt-env': 'Environment Impact',
+                'opt-hr': 'HR Policies',
+                'opt-vend': 'Vendor Invoice',
+                'opt-inc': 'Incident Report',
+                'opt-main': 'Maintenance',
+                'opt-reg': 'Regulatory Director',
+                'th-name': 'Document Name',
+                'th-cat': 'Category',
+                'th-sig': 'Digital Signature',
+                'th-status': 'Status',
+                'upload-h': 'AI Smart Upload',
+                'upload-p': 'Drag and drop to auto-classify documents using text analysis.',
+                'drop-text': 'Click or Drop PDF',
+                'btn-meta': 'Generate Metadata',
+                'load-h': 'Department Load'
+            },
+            'ml': {
+                'nav-dashboard': 'ഡാഷ്ബോർഡ്',
+                'nav-dept': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-logout': 'ലോഗ് ഔട്ട്',
+                'nav-hub-title': 'ഡോക്യുമെന്റ് ഹബ്ബ്',
+                'stat-total': 'ആകെ രേഖകൾ',
+                'stat-active': 'സജീവ വിഭാഗങ്ങൾ',
+                'stat-pending': 'പരിശോധനയിലുള്ളവ',
+                'stat-reduction': 'കടലാസ് കുറവ്',
+                'searchBar': 'ഫയലിന്റെ പേര്, വാക്ക് അല്ലെങ്കിൽ ഐഡി ഉപയോഗിച്ച് തിരയുക...',
+                'opt-all': 'എല്ലാ വകുപ്പുകളും',
+                'opt-eng': 'എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗുകൾ',
+                'opt-safe': 'സുരക്ഷാ സർക്കുലർ',
+                'opt-env': 'പരിസ്ഥിതി ആഘാതം',
+                'opt-hr': 'എച്ച്ആർ നയങ്ങൾ',
+                'opt-vend': 'വെണ്ടർ ഇൻവോയ്സ്',
+                'opt-inc': 'ഇൻസിഡന്റ് റിപ്പോർട്ട്',
+                'opt-main': 'അറ്റകുറ്റപ്പണി',
+                'opt-reg': 'റെഗുലേറ്ററി ഡയറക്ടർ',
+                'th-name': 'രേഖയുടെ പേര്',
+                'th-cat': 'വിഭാഗം',
+                'th-sig': 'ഡിജിറ്റൽ സിഗ്നേച്ചർ',
+                'th-status': 'സ്ഥിതി',
+                'upload-h': 'AI സ്മാർട്ട് അപ്‌ലോഡ്',
+                'upload-p': 'രേഖകൾ സ്വയം തരംതിരിക്കാൻ ഫയലുകൾ ഇവിടെ ഇടുക.',
+                'drop-text': 'PDF ക്ലിക്ക് ചെയ്യുക അല്ലെങ്കിൽ ഡ്രോപ്പ് ചെയ്യുക',
+                'btn-meta': 'മെറ്റാഡേറ്റ നിർമ്മിക്കുക',
+                'load-h': 'വകുപ്പ് ഭാരം'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === 'searchBar') {
+                        el.placeholder = t[id];
+                    } else {
+                        el.innerText = t[id];
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+
+    </script>
+</body>
+
+</html>

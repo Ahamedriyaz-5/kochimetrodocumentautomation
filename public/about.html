@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - KMRL Digital Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005596;
+            --secondary: #76bc21;
+            --dark: #0b2c4d;
+            --light: #f4f7f9;
+            --white: #ffffff;
+            --accent: #ffce56;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- Gradient Background --- */
+        .header-bg {
+            height: 450px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            width: 100%;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            border-bottom-left-radius: 50% 30px;
+            border-bottom-right-radius: 50% 30px;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background: var(--primary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            z-index: 1000;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 5px 12px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-links a.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 60px 20px 100px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Content Sections --- */
+        .container {
+            max-width: 1200px;
+            margin: -60px auto 60px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .story-grid {
+            display: block;
+            width: 100%;
+        }
+
+        .story-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .story-text h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .story-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Mission & Vision Grid --- */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .mv-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border-top: 5px solid var(--secondary);
+            transition: 0.3s;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .mv-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .mv-card h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        /* --- Stats Row --- */
+        .stats-row {
+            background: var(--dark);
+            color: white;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(0, 85, 150, 0.2);
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark);
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 85, 150, 0.3);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: inherit;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+
+            .story-grid,
+            .mv-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                font-size: 0.8rem;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bg"></div>
+
+    <nav>
+        <div class="logo">KMRL Digital Hub</div>
+        <ul class="nav-links">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" class="active" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep">Departments</a></li>
+            <li><a href="document.html" id="nav-doc">Documents</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section">
+        <h1 id="page-h1">About Our Journey</h1>
+        <p id="page-p">Elevating Kochi's infrastructure through cutting-edge digital document management.</p>
+    </header>
+
+    <main class="container">
+        <!-- Section: Story -->
+        <section class="card">
+            <div class="story-grid">
+                <div class="story-text">
+                    <h2 id="story-title">Our Story</h2>
+                    <p id="story-p1">
+                        Kochi Metro Rail Limited (KMRL) is at the heart of Kerala's urban transformation. As we manage
+                        thousands of critical records daily—from engineering blueprints to safety protocols—we
+                        recognized the need for a seamless, digital source of truth.
+                    </p>
+                    <p id="story-p2">
+                        The <strong style="color:var(--primary)" id="story-hub">Digital Document Management Hub</strong>
+                        was born from this vision. We moved away from traditional paper-heavy processes to create a
+                        smart, AI-integrated ecosystem that empowers our departments with instant access and total
+                        accountability.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Mission & Vision -->
+        <section class="mv-grid">
+            <div class="mv-card">
+                <i class="fas fa-bullseye"></i>
+                <h3 id="mission-title">Our Mission</h3>
+                <p id="mission-p">To provide a digital-first, secure platform that streamlines document workflows,
+                    enhances intradepartmental collaboration, and ensures 100% data integrity for Kochi Metro.</p>
+            </div>
+            <div class="mv-card">
+                <i class="fas fa-eye"></i>
+                <h3 id="vision-title">Our Vision</h3>
+                <p id="vision-p">To lead as a globally recognized digital organization, achieving 0% paper dependency
+                    through sustainable innovation and operational excellence.</p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="card" style="padding: 0; overflow: hidden; border: none;">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p id="stat-digi">Digitized Files</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p id="stat-sec">Encrypted Data</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p id="stat-live">Real-time Sync</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p id="stat-depts">Departments</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2 id="commit-h" style="font-size: 2.2rem; color: var(--dark); margin-bottom: 20px;">Committed to a Green
+                Future</h2>
+            <p id="commit-p" style="color: #666; line-height: 1.6; font-size: 1.1rem;">By digitizing our entire
+                workflow, we've saved over 2 million sheets of paper annually. Join us in making Kochi Metro a pioneer
+                in sustainable urban management.</p>
+            <a href="document.html" class="btn-primary" id="commit-btn">Explore Documentation</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 id="foot-about-h">About KMRL</h4>
+                <p id="foot-about-p">Connecting Kochi through world-class metro services and innovative digital
+                    infrastructure designed for the smart city of tomorrow.</p>
+            </div>
+            <div class="footer-col">
+                <h4 id="foot-links-h">Quick Links</h4>
+                <ul>
+                    <li><a href="#" id="foot-link1">Privacy Policy</a></li>
+                    <li><a href="#" id="foot-link2">Terms of Service</a></li>
+                    <li><a href="#" id="foot-link3">Employee Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 id="foot-tech-h">Support</h4>
+                <p id="foot-contact">Technical Issues? Contact:<br><strong>it.support@kmrl.co.in</strong></p>
+            </div>
+        </div>
+        <div class="copyright" id="foot-copy">
+            © 2025 Kochi Metro Rail Limited. Empowering Operations through Digitization.
+        </div>
+    </footer>
+
+    <script>
+        // Language Logic Synchronization
+        const translations = {
+            'en': {
+                'page-h1': 'About Our Journey',
+                'page-p': 'Elevating Kochi\'s infrastructure through cutting-edge digital document management.',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Documents',
+                'nav-contact': 'Contact',
+                'story-title': 'Our Story',
+                'story-p1': 'Kochi Metro Rail Limited (KMRL) is at the heart of Kerala\'s urban transformation. As we manage thousands of critical records daily—from engineering blueprints to safety protocols—we recognized the need for a seamless, digital source of truth.',
+                'story-hub': 'Digital Document Management Hub',
+                'story-p2': 'The Digital Document Management Hub was born from this vision. We moved away from traditional paper-heavy processes to create a smart, AI-integrated ecosystem that empowers our departments with instant access and total accountability.',
+                'mission-title': 'Our Mission',
+                'mission-p': 'To provide a digital-first, secure platform that streamlines document workflows, enhances intradepartmental collaboration, and ensures 100% data integrity for Kochi Metro.',
+                'vision-title': 'Our Vision',
+                'vision-p': 'To lead as a globally recognized digital organization, achieving 0% paper dependency through sustainable innovation and operational excellence.',
+                'stat-digi': 'Digitized Files',
+                'stat-sec': 'Encrypted Data',
+                'stat-live': 'Real-time Sync',
+                'stat-depts': 'Departments',
+                'commit-h': 'Committed to a Green Future',
+                'commit-p': 'By digitizing our entire workflow, we\'ve saved over 2 million sheets of paper annually. Join us in making Kochi Metro a pioneer in sustainable urban management.',
+                'commit-btn': 'Explore Documentation',
+                'foot-about-h': 'About KMRL',
+                'foot-about-p': 'Connecting Kochi through world-class metro services and innovative digital infrastructure designed for the smart city of tomorrow.',
+                'foot-links-h': 'Quick Links',
+                'foot-link1': 'Privacy Policy',
+                'foot-link2': 'Terms of Service',
+                'foot-link3': 'Employee Portal',
+                'foot-tech-h': 'Support',
+                'foot-contact': 'Technical Issues? Contact:<br><strong>it.support@kmrl.co.in</strong>',
+                'foot-copy': '© 2025 Kochi Metro Rail Limited. Empowering Operations through Digitization.'
+            },
+            'ml': {
+                'page-h1': 'ഞങ്ങളുടെ യാത്ര',
+                'page-p': 'ആധുനിക ഡിജിറ്റൽ രേഖാ മാനേജ്‌മെന്റിലൂടെ കൊച്ചിയുടെ അടിസ്ഥാന സൗകര്യങ്ങൾ മെച്ചപ്പെടുത്തുന്നു.',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'story-title': 'ഞങ്ങളുടെ കഥ',
+                'story-p1': 'കേരളത്തിന്റെ നഗര പരിവർത്തനത്തിന്റെ ഹൃദയഭാഗത്താണ് കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ് (KMRL). എൻജിനീയറിങ് ബ്ലൂപ്രിന്റുകൾ മുതൽ സുരക്ഷാ പ്രോട്ടോക്കോളുകൾ വരെയുള്ള ആയിരക്കണക്കിന് രേഖകൾ കൈകാര്യം ചെയ്യുമ്പോൾ, ഞങ്ങൾക്ക് ഒരു സുതാര്യമായ ഡിജിറ്റൽ സംവിധാനം ആവശ്യമാണെന്ന് ഞങ്ങൾ തിരിച്ചറിഞ്ഞു.',
+                'story-hub': 'ഡിജിറ്റൽ ഡോക്യുമെന്റ് മാനേജ്‌മെന്റ് ഹബ്ബ്',
+                'story-p2': 'ഈ കാഴ്ചപ്പാടിൽ നിന്നാണ് ഡിജിറ്റൽ ഡോക്യുമെന്റ് മാനേജ്‌മെന്റ് ഹബ്ബ് ഉദയം ചെയ്തത്. പരമ്പരാഗതമായ കടലാസ് ഉപയോഗിച്ചുള്ള പ്രക്രിയകളിൽ നിന്ന് മാറി, പ്രവർത്തനങ്ങളെ ശാക്തീകരിക്കുന്ന ഒരു സ്മാർട്ട് ഡിജിറ്റൽ സംവിധാനം ഞങ്ങൾ ഒരുക്കി.',
+                'mission-title': 'ലക്ഷ്യം',
+                'mission-p': 'KMRL-ലെ പ്രവർത്തനങ്ങൾ സുഗമമാക്കുന്നതിനും വകുപ്പുകൾ തമ്മിലുള്ള ഏകോപനം വർദ്ധിപ്പിക്കുന്നതിനുമായി സുരക്ഷിതമായ ഒരു ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോം നൽകുക എന്നതാണ് ഞങ്ങളുടെ ലക്ഷ്യം.',
+                'vision-title': 'കാഴ്ചപ്പാട്',
+                'vision-p': 'ലഭ്യമായ സാങ്കേതിക വിദ്യകൾ ഉപയോഗിച്ച് പൂർണ്ണമായും കടലാസ് രഹിതമായ, ലോകോത്തര ഡിജിറ്റൽ സ്ഥാപനമായി മാറുക എന്നതാണ് ഞങ്ങളുടെ കാഴ്ചപ്പാട്.',
+                'stat-digi': 'ഡിജിറ്റൈസ്ഡ് ഫയലുകൾ',
+                'stat-sec': 'സുരക്ഷിതമായ ഡാറ്റ',
+                'stat-live': 'തത്സമയ സിങ്ക്',
+                'stat-depts': 'വകുപ്പുകൾ',
+                'commit-h': 'ഹരിത ഭാവിയിലേക്കുള്ള പ്രതിബദ്ധത',
+                'commit-p': 'ഡിജിറ്റലൈസേഷനിലൂടെ പ്രതിവർഷം 20 ലക്ഷത്തിലധികം പേപ്പറുകൾ ലാഭിക്കാൻ ഞങ്ങൾക്ക് സാധിച്ചു. സുസ്ഥിര നഗര മാനേജ്‌മെന്റിൽ കൊച്ചി മെട്രോയെ ഒരു മാതൃകയാക്കാൻ ഞങ്ങളോടൊപ്പം ചേരുക.',
+                'commit-btn': 'രേഖകൾ പരിശോധിക്കൂ',
+                'foot-about-h': 'KMRL-നെ കുറിച്ച്',
+                'foot-about-p': 'ലോകോത്തര മെട്രോ സേവനങ്ങളിലൂടെയും ആധുനിക ഡിജിറ്റൽ സംവിധാനങ്ങളിലൂടെയും കൊച്ചിയെ പരസ്പരം ബന്ധിപ്പിക്കുന്നു.',
+                'foot-links-h': 'ദ്രുത ലിങ്കുകൾ',
+                'foot-link1': 'സ്വകാര്യതാ നയം',
+                'foot-link2': 'സേവന നിബന്ധനകൾ',
+                'foot-link3': 'എംപ്ലോയി പോർട്ടൽ',
+                'foot-tech-h': 'പിന്തുണ',
+                'foot-contact': 'സാങ്കേതിക പ്രശ്നങ്ങൾക്ക് ബന്ധപ്പെടുക:<br><strong>it.support@kmrl.co.in</strong>',
+                'foot-copy': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. ഡിജിറ്റൈസേഷനിലൂടെ പ്രവർത്തനങ്ങൾ ശാക്തീകരിക്കുന്നു.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            Object.keys(t).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id.includes('story-p') || id.includes('foot-contact')) {
+                        el.innerHTML = t[id];
+                    } else {
+                        el.innerText = t[id];
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

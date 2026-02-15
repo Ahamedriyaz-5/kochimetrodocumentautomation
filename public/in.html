@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMRL Digital Hub - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enables smooth scrolling */
+
+        body {
+            background-color: #f4f7f9;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR STYLES */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background-color: #0b2c4d;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+            background-color: #1e7bbf;
+            color: white;
+            border-left: 4px solid #00f2fe;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER & NAV */
+        .logo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: white;
+        }
+
+        .one {
+            height: 80px;
+        }
+
+        .two {
+            height: 90px;
+        }
+
+        .three {
+            height: 45px;
+        }
+
+        .nav-bar {
+            background-color: #005596;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            color: white;
+            min-height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 15px;
+            /* Spacing from menu on desktop */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ungrouped nav items flow naturally on desktop */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            /* Push to right on desktop */
+        }
+
+        /* DASHBOARD GRID */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        /* CAROUSEL */
+        .carousel-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 500px;
+            background: #000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-img.active {
+            opacity: 1;
+        }
+
+        /* NOTIFICATIONS & NEWS */
+        .news-section,
+        .notifications-sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-heading {
+            color: #005596;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateX(5px);
+        }
+
+        .notif-card {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+
+        .urgent {
+            background-color: #fff5f5;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+        }
+
+        .info {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        /* FEATURES SECTION */
+        .features-section {
+            padding: 60px 40px;
+            text-align: center;
+            background: white;
+            margin: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .features-section h1 {
+            color: #0056b3;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .feature-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .feature-card:hover {
+            background: #f0f7ff;
+        }
+
+        .feature-card h3 {
+            color: #0056b3;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* FOOTER SECTION */
+        .footer-section {
+            background-color: #0b2c4d;
+            color: #ffffff;
+            padding: 40px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-card {
+            flex: 1;
+        }
+
+        .footer-card h4 {
+            color: #00f2fe;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-card ul {
+            list-style: none;
+        }
+
+        .footer-card ul li,
+        .footer-card p {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            color: #cbd5e0;
+        }
+
+        /* SCROLL REVEAL ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CHATBOT & BACK TO TOP */
+        .widgets-group {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-button,
+        .top-button {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        .chat-button {
+            background: #1e7bbf;
+        }
+
+        .top-button {
+            background: #005596;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* AI CHAT WINDOW REDESIGN */
+        .chat-window {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 400px;
+            height: 550px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 2500;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chat-window.active {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .chat-header {
+            background: #004a99;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .chat-header-title {
+            font-size: 16px;
+            font-weight: 700;
+            flex: 1;
+            text-align: center;
+        }
+
+        .chat-lang-select {
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: none;
+            font-size: 13px;
+            background: white;
+            color: #333;
+            outline: none;
+        }
+
+        .chat-close {
+            font-size: 24px;
+            cursor: pointer;
+            padding-left: 10px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: white;
+        }
+
+        .chat-footer {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-footer button {
+            background: #004a99;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .mic-btn {
+            background: #f0f0f0;
+            color: #555;
+            border: none;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .mic-btn.listening {
+            background: #ff4444 !important;
+            color: white !important;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .voice-guidance {
+            position: absolute;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 74, 153, 0.95);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1005;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+        }
+
+        .voice-guidance.active {
+            display: block;
+            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px) scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        .msg.ai {
+            background: #f0f1f5;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg.user {
+            background: #004a99;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .chat-window {
+                width: calc(100% - 20px);
+                height: 80vh;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+
+        /* RESPONSIVE SETTINGS */
+        @media (max-width: 1024px) {
+
+            .dashboard-grid,
+            .features-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-title,
+            .sidebar-menu span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .features-grid {
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* 1. Phone Branding (Single Row Method) */
+            .logo-header {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px 5px;
+                gap: 4px;
+                background: white;
+                border-bottom: 1px solid #edf2f7;
+            }
+
+            .logo-header img {
+                max-height: 35px;
+                max-width: 28%;
+                object-fit: contain;
+            }
+
+            /* 2. Compact Phone Navbar (56px Standard) */
+            .nav-bar {
+                padding: 0 10px;
+                height: 56px;
+                min-height: 56px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: nowrap;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 20px;
+                width: 30px;
+            }
+
+            .nav-title {
+                flex: 1;
+                text-align: center;
+                font-size: clamp(11px, 3.5vw, 14px);
+                font-weight: 700;
+                margin: 0 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .nav-actions {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+
+            #langSelect {
+                padding: 2px;
+                font-size: 11px;
+            }
+
+            #nav-login {
+                padding: 4px 8px !important;
+                font-size: 11px;
+                font-weight: 700;
+            }
+
+            /* 3. Phone Layout & Content */
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                width: 260px;
+                transform: translateX(-100%);
+                z-index: 2000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar.active .sidebar-title,
+            .sidebar.active .sidebar-menu span {
+                display: inline;
+            }
+
+            .dashboard-grid {
+                padding: 10px;
+                gap: 15px;
+            }
+
+            .carousel-container {
+                height: 220px;
+                /* Better mobile ratio */
+                margin: 0 5px;
+                border-radius: 8px;
+            }
+
+            .features-section {
+                padding: 30px 15px;
+                margin: 10px;
+                border-radius: 8px;
+            }
+
+            .features-grid {
+                gap: 15px;
+            }
+
+            .news-section,
+            .notifications-sidebar {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">KMRL Digital Hub</div>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="in.html" class="active"><i class="fas fa-th-large"></i> <span
+                        id="side-dash">Dashboard</span></a>
+                <a href="document.html"><i class="fas fa-file-alt"></i> <span id="side-doc">Documents</span></a>
+                <a href="dep.html"><i class="fas fa-building"></i> <span id="side-dep">Departments</span></a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> <span id="side-contact">Contact</span></a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> <span id="side-about">About Us</span></a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="logo-header">
+                <img src="pillar.webp" class="one" alt="Ashoka">
+                <img src="logo.png" class="two" alt="KMRL">
+                <img src="gov.png" class="three" alt="Gov Logos">
+            </div>
+
+            <nav class="nav-bar">
+                <i class="fas fa-bars menu-toggle" id="menu-btn"></i>
+                <div class="nav-title" id="main-title">KOCHI METRO - Document Hub</div>
+
+                <div class="nav-actions">
+                    <div class="language-switcher" style="display:inline-block; margin-right: 20px;">
+                        <select id="langSelect" onchange="toggleLanguage(this.value)"
+                            style="padding: 5px; border-radius: 4px;">
+                            <option value="en">English</option>
+                            <option value="ml">മലയാളം</option>
+                        </select>
+                    </div>
+                    <a href="login.html"
+                        style="color:white; text-decoration:none; border: 1px solid white; padding: 5px 15px; border-radius: 4px;"
+                        id="nav-login">Login</a>
+                </div>
+            </nav>
+
+            <div class="dashboard-grid">
+                <div class="left-section">
+                    <div class="carousel-container" id="carousel">
+                        <img src="kochi2.jpg" class="carousel-img active" alt="Frame 1">
+                        <img src="kochi.jpg" class="carousel-img" alt="Frame 2">
+                        <img src="kochi1.jpg" class="carousel-img" alt="Frame 3">
+                    </div>
+
+                    <div class="news-section reveal" style="margin-top: 25px;">
+                        <h2 class="section-heading" id="news-title">News & Updates</h2>
+                        <div class="news-item">
+                            <h3 id="news1-h">🚀 New AI-Powered Document Engine</h3>
+                            <p id="news1-p" style="font-size: 14px; color: #666;">Advanced AI capabilities now live with
+                                95% accuracy for automated file sorting.</p>
+                        </div>
+                        <div class="news-item">
+                            <h3 id="news2-h">🚉 Phase 2 Extension Updates</h3>
+                            <p id="news2-p" style="font-size: 14px; color: #666;">All technical blueprints for Phase 2
+                                have been digitized and uploaded.</p>
+                        </div>
+                        <div class="news-item">
+                            <h3 id="news3-h">🔒 Security Protocol Enhancement</h3>
+                            <p id="news3-p" style="font-size: 14px; color: #666;">KMRL Hub has integrated Multi-Factor
+                                Authentication for all staff logins.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notifications-sidebar reveal" id="notif-container">
+                    <h2 class="section-heading" id="notif-title">Notifications</h2>
+                    <div class="notif-card urgent">
+                        <strong id="label-urgent">🔴 URGENT</strong>
+                        <p id="notif1-p" style="font-size: 13px; margin-top: 5px;">Document processing failed for 15
+                            files. Please re-upload.</p>
+                    </div>
+                    <div class="notif-card info">
+                        <strong id="label-maint">🔵 MAINTENANCE</strong>
+                        <p id="notif2-p" style="font-size: 13px; margin-top: 5px;">Server maintenance scheduled for
+                            Sunday, 2:00 AM.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="features-section reveal">
+                <h1 id="feat-title">Key Features & Benefits</h1>
+                <p class="subtitle" id="feat-subtitle">Our comprehensive automation solution delivers measurable
+                    improvements</p>
+                <div class="features-grid">
+                    <div class="feature-card reveal">
+                        <h3 id="feat1-h">Faster Document Access</h3>
+                        <p id="feat1-p">Instant search and retrieval of documents with AI-powered categories and
+                            indexing.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <h3 id="feat2-h">Reduced Error</h3>
+                        <p id="feat2-p">Automated validation and quality checks eliminate human errors and ensure
+                            accuracy.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <h3 id="feat3-h">Centralized Repository</h3>
+                        <p id="feat3-p">Single source of truth for all documents with role-based access.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <h3 id="feat4-h">Eco-Friendly Workflow</h3>
+                        <p id="feat4-p">Reduce paper consumption by 90% and contribute to sustainability.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer-section reveal">
+                <div class="footer-grid">
+                    <div class="footer-card">
+                        <h4 id="foot-about">About KMRL Hub</h4>
+                        <p id="foot-desc">The KMRL Digital Hub is a state-of-the-art document management system designed
+                            to streamline Kochi Metro operations using AI and automation.</p>
+                    </div>
+                    <div class="footer-card">
+                        <h4 id="foot-quick">Quick Links</h4>
+                        <ul>
+                            <li><a href="in.html" style="color: #cbd5e0; text-decoration: none;">Dashboard</a></li>
+                            <li><a href="document.html" style="color: #cbd5e0; text-decoration: none;">Documents</a>
+                            </li>
+                            <li><a href="dep.html" style="color: #cbd5e0; text-decoration: none;">Departments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-card">
+                        <h4 id="foot-contact">Contact</h4>
+                        <p>KMRL Corporate Office, Kochi</p>
+                        <p>Email: hub@kmrl.co.in</p>
+                        <p>Phone: +91 484 2846100</p>
+                    </div>
+                </div>
+                <div
+                    style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; color: #718096;">
+                    © 2025 Kochi Metro Rail Limited. All rights reserved.
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- WIDGETS GROUP -->
+    <div class="widgets-group">
+        <div class="top-button" id="topBtn" title="Back to Top">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+        <div class="chat-button" id="openChat">
+            <i class="fas fa-robot"></i>
+        </div>
+    </div>
+
+    <!-- AI CHAT WINDOW -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <i class="fas fa-robot"></i>
+            <div class="chat-header-title">KMRL AI Assistant</div>
+            <span class="chat-close" id="closeChat">&times;</span>
+        </div>
+
+        <div id="voiceGuidance" class="voice-guidance">Try saying: "Go to Department"</div>
+
+        <div class="chat-body" id="chatBody">
+            <div class="msg ai">Hello! I'm your KMRL AI Assistant. How can I help you navigate the Digital Hub today?
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <button class="mic-btn" id="micBtn" onclick="toggleVoice()">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <input type="text" id="userInput" placeholder="Ask something...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. CAROUSEL LOGIC ---
+        const images = document.querySelectorAll('.carousel-img');
+        let currentImg = 0;
+
+        function nextImage() {
+            images[currentImg].classList.remove('active');
+            currentImg = (currentImg + 1) % images.length;
+            images[currentImg].classList.add('active');
+        }
+        setInterval(nextImage, 5000);
+
+        // --- 2. SCROLL EFFECTS ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const topBtn = document.getElementById('topBtn');
+
+        function handleScroll() {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+
+            if (window.scrollY > 300) {
+                topBtn.style.opacity = '1';
+                topBtn.style.visibility = 'visible';
+            } else {
+                topBtn.style.opacity = '0';
+                topBtn.style.visibility = 'hidden';
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+        window.onload = handleScroll;
+
+        topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // --- 3. MOBILE MENU ---
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        if (menuBtn) {
+            menuBtn.onclick = () => {
+                sidebar.classList.toggle('active');
+            };
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        // --- 4. CHATBOT INTERFACE ---
+        const chatWindow = document.getElementById('chatWindow');
+        const openChat = document.getElementById('openChat');
+        const closeChat = document.getElementById('closeChat');
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        openChat.onclick = () => chatWindow.classList.add('active');
+        closeChat.onclick = () => chatWindow.classList.remove('active');
+
+        function addMessage(text, type) {
+            const msg = document.createElement('div');
+            msg.className = `msg ${type}`;
+            msg.innerText = text;
+            chatBody.appendChild(msg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Simple Nav Map for Chatbot
+        const navMap = {
+            'department': 'dep.html',
+            'departments': 'dep.html',
+            'about': 'about.html',
+            'contact': 'contact.html',
+            'document': 'document.html',
+            'documents': 'document.html',
+            'dashboard': 'in.html',
+            // Malayalam
+            'വകുപ്പുകൾ': 'dep.html',
+            'ഞങ്ങളെക്കുറിച്ച്': 'about.html',
+            'ബന്ധപ്പെടുക': 'contact.html',
+            'രേഖകൾ': 'document.html'
+        };
+
+        const actionMap = {
+            'scroll news': () => document.querySelector('.news-section').scrollIntoView({ behavior: 'smooth' }),
+            'scroll notification': () => document.querySelector('.notifications-sidebar').scrollIntoView({ behavior: 'smooth' }),
+            'scroll top': () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+            'scroll bottom': () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }),
+            'english': () => toggleLanguage('en'),
+            'malayalam': () => toggleLanguage('ml')
+        };
+
+        function processCommand(input) {
+            const lowInput = input.toLowerCase();
+
+            // Check Actions
+            for (let cmd in actionMap) {
+                if (lowInput.includes(cmd)) {
+                    addMessage(`Executing: ${cmd}...`, 'ai');
+                    actionMap[cmd]();
+                    return true;
+                }
+            }
+
+            // Check Navigation
+            for (let key in navMap) {
+                if (lowInput.includes(key)) {
+                    addMessage(`Navigating to ${key} page...`, 'ai');
+                    setTimeout(() => window.location.href = navMap[key], 1000);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        sendBtn.onclick = () => {
+            const text = userInput.value.trim();
+            if (!text) return;
+            addMessage(text, 'user');
+            userInput.value = '';
+
+            if (!processCommand(text)) {
+                setTimeout(() => {
+                    addMessage("I'm not sure how to do that yet. Try saying 'Go to Departments' or 'Go to About Us'.", 'ai');
+                }, 500);
+            }
+        };
+
+        userInput.onkeypress = (e) => { if (e.key === 'Enter') sendBtn.click(); };
+
+        // --- 5. BILINGUAL SUPPORT (English/Malayalam) ---
+        const UI_TEXT = {
+            'en': {
+                'side-dash': 'Dashboard',
+                'side-doc': 'Documents',
+                'side-dep': 'Departments',
+                'side-about': 'About Us',
+                'side-contact': 'Contact',
+                'main-title': 'KOCHI METRO - Document Hub',
+                'nav-login': 'Login',
+                'news-title': 'News & Updates',
+                'notif-title': 'Notifications',
+                'label-urgent': '🔴 URGENT',
+                'label-maint': '🔵 MAINTENANCE',
+                'feat-title': 'Key Features & Benefits',
+                'feat-subtitle': 'Our comprehensive automation solution delivers measurable improvements',
+                'feat1-h': 'Faster Document Access',
+                'feat1-p': 'Instant search and retrieval of documents with AI-powered categories and indexing.',
+                'feat2-h': 'Reduced Error',
+                'feat2-p': 'Automated validation and quality checks eliminate human errors and ensure accuracy.',
+                'feat3-h': 'Centralized Repository',
+                'feat3-p': 'Single source of truth for all documents with role-based access.',
+                'feat4-h': 'Eco-Friendly Workflow',
+                'feat4-p': 'Reduce paper consumption by 90% and contribute to sustainability.',
+                'foot-about': 'About KMRL Hub',
+                'foot-desc': 'The KMRL Digital Hub is a state-of-the-art document management system designed to streamline Kochi Metro operations using AI and automation.',
+                'mic-hint': 'Try saying: "Go to Department"',
+                'news1-h': '🚀 New AI-Powered Document Engine',
+                'news2-h': '🚉 Phase 2 Extension Updates',
+                'news3-h': '🔒 Security Protocol Enhancement'
+            },
+            'ml': {
+                'side-dash': 'ഡാഷ്ബോർഡ്',
+                'side-doc': 'രേഖകൾ',
+                'side-dep': 'വകുപ്പുകൾ',
+                'side-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'side-contact': 'ബന്ധപ്പെടുക',
+                'main-title': 'കൊച്ചി മെട്രോ - ഡോക്യുമെന്റ് ഹബ്',
+                'nav-login': 'ലോഗിൻ',
+                'news-title': 'വാർത്തകളും പുതുക്കലുകളും',
+                'notif-title': 'അറിയിപ്പുകൾ',
+                'label-urgent': '🔴 അത്യാവശ്യം',
+                'label-maint': '🔵 അറ്റകുറ്റപ്പണി',
+                'feat-title': 'പ്രധാന സവിശേഷതകളും ഗുണങ്ങളും',
+                'feat-subtitle': 'ഞങ്ങളുടെ സമഗ്രമായ ഓട്ടോമേഷൻ പരിഹാരം മികച്ച ഫലങ്ങൾ നൽകുന്നു',
+                'feat1-h': 'വേഗത്തിലുള്ള രേഖാ ലഭ്യത',
+                'feat1-p': 'AI ഉപയോഗിച്ച് രേഖകൾ തൽക്ഷണം തിരയാനും കണ്ടെത്താനും സാധിക്കുന്നു.',
+                'feat2-h': 'പിശകുകൾ കുറയ്ക്കുന്നു',
+                'feat2-p': 'ഓട്ടോമേറ്റഡ് വാലിഡേഷൻ വഴി മനുഷ്യസഹജമായ പിശകുകൾ ഒഴിവാക്കുന്നു.',
+                'feat3-h': 'കേന്ദ്രീകൃത ശേഖരം',
+                'feat3-p': 'എല്ലാ രേഖകൾക്കും ഒറ്റ ഉറവിടം, സുരക്ഷിതമായ ആക്സസ്.',
+                'feat4-h': 'പരിസ്ഥിതി സൗഹൃദം',
+                'feat4-p': 'കടലാസ് ഉപയോഗം 90% കുറയ്ക്കാനും പരിസ്ഥിതിയെ സംരക്ഷിക്കാനും സഹായിക്കുന്നു.',
+                'foot-about': 'KMRL ഹബ്ബിനെക്കുറിച്ച്',
+                'foot-desc': 'കൊച്ചി മെട്രോ പ്രവർത്തനങ്ങൾ ലളിതമാക്കാൻ രൂപകൽപ്പന ചെയ്ത അത്യാധുനിക സംവിധാനമാണ് KMRL ഡിജിറ്റൽ ഹബ്.',
+                'mic-hint': 'പറയുക: "വകുപ്പുകൾ കാണിക്കുക"',
+                'news1-h': '🚀 പുതിയ AI ഡോക്യുമെന്റ് എഞ്ചിൻ',
+                'news2-h': '🚉 രണ്ടാം ഘട്ടം വിപുലീകരണ വാർത്തകൾ',
+                'news3-h': '🔒 സുരക്ഷാ പ്രോട്ടോക്കോൾ മെച്ചപ്പെടുത്തി'
+            }
+        };
+
+        function toggleLanguage(lang) {
+            localStorage.setItem('kmrl_lang', lang);
+            const t = UI_TEXT[lang];
+
+            // Update UI Elements
+            document.getElementById('side-dash').innerText = t['side-dash'];
+            document.getElementById('side-doc').innerText = t['side-doc'];
+            document.getElementById('side-dep').innerText = t['side-dep'];
+            document.getElementById('side-about').innerText = t['side-about'];
+            document.getElementById('side-contact').innerText = t['side-contact'];
+            document.getElementById('main-title').innerText = t['main-title'];
+            document.getElementById('nav-login').innerText = t['nav-login'];
+            document.getElementById('news-title').innerText = t['news-title'];
+            document.getElementById('notif-title').innerText = t['notif-title'];
+            document.getElementById('label-urgent').innerText = t['label-urgent'];
+            document.getElementById('label-maint').innerText = t['label-maint'];
+            document.getElementById('feat-title').innerText = t['feat-title'];
+            document.getElementById('feat-subtitle').innerText = t['feat-subtitle'];
+            document.getElementById('feat1-h').innerText = t['feat1-h'];
+            document.getElementById('feat1-p').innerText = t['feat1-p'];
+            document.getElementById('feat2-h').innerText = t['feat2-h'];
+            document.getElementById('feat2-p').innerText = t['feat2-p'];
+            document.getElementById('feat3-h').innerText = t['feat3-h'];
+            document.getElementById('feat3-p').innerText = t['feat3-p'];
+            document.getElementById('feat4-h').innerText = t['feat4-h'];
+            document.getElementById('feat4-p').innerText = t['feat4-p'];
+
+            document.getElementById('news1-h').innerText = t['news1-h'];
+            document.getElementById('news2-h').innerText = t['news2-h'];
+            document.getElementById('news3-h').innerText = t['news3-h'];
+
+            // Update Mic Hint
+            document.getElementById('voiceGuidance').innerText = t['mic-hint'];
+
+            // Set select value
+            document.getElementById('langSelect').value = lang;
+        }
+
+        // --- 6. SPEECH RECOGNITION ---
+        let recognition;
+        let isListening = false;
+
+        function initRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('listening');
+                document.getElementById('voiceGuidance').classList.add('active');
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                document.getElementById('micBtn').classList.remove('listening');
+                setTimeout(() => {
+                    document.getElementById('voiceGuidance').classList.remove('active');
+                }, 2000);
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                addMessage(transcript, 'user');
+                processCommand(transcript);
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error", event.error);
+                isListening = false;
+                document.getElementById('micBtn').classList.remove('listening');
+            };
+        }
+
+        function toggleVoice() {
+            if (!recognition) initRecognition();
+            if (!recognition) return alert("Speech recognition is not supported in your browser.");
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                const lang = localStorage.getItem('kmrl_lang') || 'en';
+                recognition.lang = lang === 'ml' ? 'ml-IN' : 'en-US';
+                recognition.start();
+            }
+        }
+
+        // 6. Dynamic Notification System (Every 3 Minutes - Random Metro Alerts)
+        const metroMessages = {
+            'en': [
+                { title: '📑 NEW UPLOAD', text: 'New Technical Blueprint uploaded for Phase 2 extension.' },
+                { title: '💰 INVOICE PROCESSED', text: 'Vendor invoices for January have been successfully processed.' },
+                { title: '🛡️ SAFETY UPDATE', text: 'Safety circular #402 updated in the Digital Hub.' },
+                { title: '🏗️ DRAWING REVISED', text: 'Engineering drawing for Aluva station has been revised.' },
+                { title: '📝 REPORT DIGITIZED', text: 'Incident report #88 has been digitized and filed.' }
+            ],
+            'ml': [
+                { title: '📑 പുതിയ അപ്‌ലോഡ്', text: 'രണ്ടാം ഘട്ടത്തിനായുള്ള പുതിയ സാങ്കേതിക ബ്ലൂപ്രിന്റ് അപ്‌ലോഡ് ചെയ്തു.' },
+                { title: '💰 ഇൻവോയ്സ് പ്രോസസ്സ് ചെയ്തു', text: 'ജനുവരിയിലെ വെണ്ടർ ഇൻവോയ്‌സുകൾ വിജയകരമായി പ്രോസസ്സ് ചെയ്തു.' },
+                { title: '🛡️ സുരക്ഷാ അപ്ഡേറ്റ്', text: 'സുരക്ഷാ സർക്കുലർ #402 ഹബ്ബിൽ പുതുക്കി.' },
+                { title: '🏗️ ഡ്രോയിംഗ് പരിഷ്കരിച്ചു', text: 'ആലുവ സ്റ്റേഷന്റെ എഞ്ചിനീയറിംഗ് ഡ്രോയിംഗ് പരിഷ്കരിച്ചു.' },
+                { title: '📝 റിപ്പോർട്ട് ഫയൽ ചെയ്തു', text: 'ഇൻസിഡന്റ് റിപ്പോർട്ട് #88 ഡിജിറ്റൈസ് ചെയ്ത് ഫയൽ ചെയ്തു.' }
+            ]
+        };
+
+        function addNewNotification() {
+            const container = document.getElementById('notif-container');
+            if (!container) return;
+
+            const lang = localStorage.getItem('kmrl_lang') || 'en';
+            const messages = metroMessages[lang] || metroMessages['en'];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+
+            const now = new Date();
+            const timeStr = now.getHours() + ":" + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
+
+            const notif = document.createElement('div');
+            notif.className = 'notif-card info reveal active';
+            notif.style.borderLeft = "4px solid var(--secondary)";
+
+            notif.innerHTML = `
+                <strong style="color:var(--secondary)">${randomMsg.title}</strong>
+                <p style="font-size: 13px; margin-top: 5px;">${randomMsg.text} <br><small style="color:#888;">Time: ${timeStr}</small></p>
+            `;
+
+            const heading = container.querySelector('h2');
+            if (heading.nextSibling) {
+                container.insertBefore(notif, heading.nextSibling);
+            } else {
+                container.appendChild(notif);
+            }
+        }
+
+        // Initialize Language on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang');
+            if (savedLang) {
+                toggleLanguage(savedLang);
+            }
+            initRecognition();
+
+            // Set interval for 3 minutes (180,000 ms)
+            setInterval(addNewNotification, 180000);
+        });
+    </script>
+</body>
+
+</html>

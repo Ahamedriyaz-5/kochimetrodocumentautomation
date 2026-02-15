@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Circulars & Policies | Kochi Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fcfcfc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header-bg {
+            background-color: #00529b;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #00529b;
+            padding-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .navbar a.active {
+            background-color: #f97316;
+            /* Safety Orange */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 82, 155, 0.95);
+                border-radius: 8px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Alert Box */
+        .safety-hero {
+            background: #fff7ed;
+            border: 2px solid #fed7aa;
+            border-left: 8px solid #f97316;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Section Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-top: 4px solid #00529b;
+        }
+
+        .content-card h3 {
+            color: #00529b;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Safety Features List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Sidebar Panels */
+        .sidebar-box {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .emergency-btn {
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: block;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        /* Image Box */
+        .image-container {
+            background: white;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .summary-footer {
+            background: #1e293b;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        @media (max-width: 850px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-bg">
+        <h1 id="page-h1">Safety & Security Policies</h1>
+        <p id="page-p">Operational Vigilance and Emergency Preparedness Framework</p>
+    </header>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i> <span id="nav-menu">Menu</span></div>
+        <ul id="nav-list">
+            <li><a href="in.html" id="nav-dash">Dashboard</a></li>
+            <li><a href="about.html" id="nav-about">About Us</a></li>
+            <li><a href="dep.html" id="nav-dep" class="active">Departments</a></li>
+            <li><a href="document.html" id="nav-doc">Document</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="safety-hero">
+            <div>
+                <h2 id="hero-h">Comprehensive Safety Commitment</h2>
+                <p id="hero-p">KMRL ensures a secure environment through passenger safety monitoring, worker health
+                    measures, and
+                    24/7 operational vigilance.</p>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            <div class="main-column">
+
+                <div class="content-card">
+                    <h3 id="sec1-h">Operational & Passenger Safety</h3>
+                    <p id="sec1-p">KMRL conducts regular audits for hazardous conditions, such as unsecured billboards
+                        and
+                        structural weaknesses, to prevent third-rail obstructions during monsoon periods. We collaborate
+                        with IITs and CSIR-SERC for viaduct structural monitoring.</p>
+
+
+                </div>
+
+                <div class="content-card">
+                    <h3 id="sec2-h">Construction Phase (OHS) Protocols</h3>
+                    <p id="sec2-p">During Phase II construction, KMRL mandates Occupational Health and Safety (OHS)
+                        Management Plans
+                        for all contractors. This includes:</p>
+                    <ul class="feature-list" style="margin-top:10px;">
+                        <li><strong id="step1-h">Monsoon Preparedness:</strong> <span id="step1-p">Stabilizing temporary
+                                structures and clearing drainage.</span></li>
+                        <li><strong id="step2-h">Community Safety:</strong> <span id="step2-p">Managing dust, noise, and
+                                vibration in dense urban zones.</span></li>
+                        <li><strong id="step3-h">Traffic Wardens:</strong> <span id="step3-p">Deployed to manage
+                                diversions and protect pedestrians.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <aside class="sidebar-column">
+                <div class="sidebar-box">
+                    <h4 style="color:#00529b;" id="side1-h">Grievance Redress (GRM)</h4>
+                    <p style="font-size: 0.85rem; margin: 10px 0;" id="side1-p">Passengers and staff can report safety
+                        concerns via
+                        WhatsApp, Email, or our toll-free hotline.</p>
+                    <a href="#" class="emergency-btn" id="side1-btn">EMERGENCY HOTLINE</a>
+                </div>
+
+                <div class="sidebar-box" style="border-left: 4px solid #f97316;">
+                    <h4 id="side2-h">Vigilance & Oversight</h4>
+                    <p style="font-size: 0.85rem;" id="side2-p">Guided by the KMRL Vigilance Manual to ensure ethical
+                        procurement and
+                        whistleblower protection.</p>
+                </div>
+
+                <div class="sidebar-box">
+                    <h4 id="side3-h">Emergency Teams</h4>
+                    <p style="font-size: 0.85rem;" id="side3-p">Dedicated Emergency Response Teams (ERTs) are stationed
+                        at all
+                        critical nodes for swift incident management.</p>
+                </div>
+            </aside>
+        </div>
+
+        <div class="summary-footer">
+            <h3 style="color:#f97316; margin-bottom: 20px;" id="sum-h">Safety Policy Summary</h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; font-size: 0.9rem;">
+                <div>
+                    <strong id="sum1-h">Infrastructure</strong><br>
+                    <span id="sum1-p">Structural audits and camber monitoring with IIT experts.</span>
+                </div>
+                <div>
+                    <strong id="sum2-h">Public Health</strong><br>
+                    <span id="sum2-p">ESS standards for dust, noise, and vibration mitigation.</span>
+                </div>
+                <div>
+                    <strong id="sum3-h">Response</strong><br>
+                    <span id="sum3-p">ERTs and Emergency Trip Switch (ETS) integration.</span>
+                </div>
+                <div>
+                    <strong id="sum4-h">Accountability</strong><br>
+                    <span id="sum4-p">Grievance redressal via structured official channels.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-text">
+        © 2025 Kochi Metro Rail Limited. <br>
+        Safety and Security is our Shared Responsibility.
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navList = document.getElementById('nav-list');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+
+        // --- Language Synchronisation Logic ---
+        const translations = {
+            'en': {
+                'page-h1': 'Safety & Security Policies',
+                'page-p': 'Operational Vigilance and Emergency Preparedness Framework',
+                'nav-dash': 'Dashboard',
+                'nav-about': 'About Us',
+                'nav-dep': 'Departments',
+                'nav-doc': 'Documents',
+                'nav-contact': 'Contact',
+                'nav-login': 'Login',
+                'nav-menu': 'Menu',
+                'hero-h': 'Comprehensive Safety Commitment',
+                'hero-p': 'KMRL ensures a secure environment through passenger safety monitoring, worker health measures, and 24/7 operational vigilance.',
+                'sec1-h': 'Operational & Passenger Safety',
+                'sec1-p': 'KMRL conducts regular audits for hazardous conditions, such as unsecured billboards and structural weaknesses, to prevent third-rail obstructions during monsoon periods.',
+                'sec2-h': 'Construction Phase (OHS) Protocols',
+                'sec2-p': 'During Phase II construction, KMRL mandates Occupational Health and Safety (OHS) Management Plans.',
+                'step1-h': 'Monsoon Preparedness:',
+                'step1-p': 'Stabilizing temporary structures and clearing drainage.',
+                'step2-h': 'Community Safety:',
+                'step2-p': 'Managing dust, noise, and vibration in dense urban zones.',
+                'step3-h': 'Traffic Wardens:',
+                'step3-p': 'Deployed to manage diversions and protect pedestrians.',
+                'side1-h': 'Grievance Redress (GRM)',
+                'side1-p': 'Passengers and staff can report safety concerns via WhatsApp, Email, or our toll-free hotline.',
+                'side1-btn': 'EMERGENCY HOTLINE',
+                'side2-h': 'Vigilance & Oversight',
+                'side2-p': 'Guided by the KMRL Vigilance Manual to ensure ethical procurement and whistleblower protection.',
+                'side3-h': 'Emergency Teams',
+                'side3-p': 'Dedicated Emergency Response Teams (ERTs) are stationed at all critical nodes.',
+                'sum-h': 'Safety Policy Summary',
+                'sum1-h': 'Infrastructure',
+                'sum1-p': 'Structural audits and camber monitoring with IIT experts.',
+                'sum2-h': 'Public Health',
+                'sum2-p': 'ESS standards for dust, noise, and vibration mitigation.',
+                'sum3-h': 'Response',
+                'sum3-p': 'ERTs and Emergency Trip Switch (ETS) integration.',
+                'sum4-h': 'Accountability',
+                'sum4-p': 'Grievance redressal via structured official channels.',
+                'footer-text': '© 2025 Kochi Metro Rail Limited. \nSafety and Security is our Shared Responsibility.'
+            },
+            'ml': {
+                'page-h1': 'സുരക്ഷാ നയങ്ങൾ',
+                'page-p': 'പ്രവർത്തന ജാഗ്രതയും അടിയന്തര തയ്യാറെടുപ്പും',
+                'nav-dash': 'ഡാഷ്ബോർഡ്',
+                'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+                'nav-dep': 'വകുപ്പുകൾ',
+                'nav-doc': 'രേഖകൾ',
+                'nav-contact': 'ബന്ധപ്പെടുക',
+                'nav-login': 'ലോഗിൻ',
+                'nav-menu': 'മെനു',
+                'hero-h': 'സമഗ്രമായ സുരക്ഷാ പ്രതിബദ്ധത',
+                'hero-p': 'യാത്രക്കാരുടെ സുരക്ഷ, ജീവനക്കാരുടെ ആരോഗ്യ നടപടികൾ, 24/7 ജാഗ്രത എന്നിവയിലൂടെ കെഎംആർഎൽ സുരക്ഷിതമായ അന്തരീക്ഷം ഉറപ്പാക്കുന്നു.',
+                'sec1-h': 'പ്രവർത്തനവും യാത്രക്കാരുടെ സുരക്ഷയും',
+                'sec1-p': 'മഴക്കാലത്ത് തടസ്സങ്ങൾ ഒഴിവാക്കാൻ പരസ്യ ബോർഡുകളും വയാഡക്റ്റുകളും മെട്രോ പതിവായി പരിശോധിക്കാറുണ്ട്.',
+                'sec2-h': 'നിർമ്മാണ ഘട്ടത്തിലെ സുരക്ഷാ മാനദണ്ഡങ്ങൾ',
+                'sec2-p': 'ഫേസ് 2 നിർമ്മാണ വേളയിൽ എല്ലാ കരാറുകൾക്കും ഓക്യുപേഷണൽ ഹെൽത്ത് ആന്റ് സേഫ്റ്റി (OHS) നിർബന്ധമാണ്.',
+                'step1-h': 'മഴക്കാല തയ്യാറെടുപ്പുകൾ:',
+                'step1-p': 'താൽക്കാലിക നിർമ്മിതികൾ സുരക്ഷിതമാക്കുകയും ഡ്രെയിനേജ് വൃത്തിയാക്കുകയും ചെയ്യുന്നു.',
+                'step2-h': 'കമ്മ്യൂണിറ്റി സുരക്ഷ:',
+                'step2-p': 'പൊടി, ശബ്ദം, പ്രകമ്പനം എന്നിവ നിയന്ത്രിക്കുന്നു.',
+                'step3-h': 'ട്രാഫിക് വാർഡൻമാർ:',
+                'step3-p': 'ഗതാഗത നിയന്ത്രണത്തിനും കാൽനടയാത്രക്കാരുടെ സുരക്ഷയ്ക്കുമായി നിയോഗിച്ചിരിക്കുന്നു.',
+                'side1-h': 'പരാതി പരിഹാര സംവിധാനം',
+                'side1-p': 'വാട്സാപ്പ്, ഇമെയിൽ അല്ലെങ്കിൽ ടോൾ ഫ്രീ നമ്പർ വഴി സുരക്ഷാ ആശങ്കകൾ അറിയിക്കാം.',
+                'side1-btn': 'അടിയന്തര ഹെൽപ്പ് ലൈൻ',
+                'side2-h': 'ജാഗ്രതയും മേൽനോട്ടവും',
+                'side2-p': 'ധാർമ്മികമായ സംഭരണവും വിസിൽബ്ലോവർ സംരക്ഷണവും കെഎംആർഎൽ ഉറപ്പാക്കുന്നു.',
+                'side3-h': 'അടിയന്തര വിഭാഗം',
+                'side3-p': 'എല്ലാ പ്രധാന പോയിന്റുകളിലും എമർജൻസി റെസ്പോൺസ് ടീമുകളെ (ERT) നിയോഗിച്ചിട്ടുണ്ട്.',
+                'sum-h': 'സുരക്ഷാ നയ സംഗ്രഹം',
+                'sum1-h': 'അടിസ്ഥാന സൗകര്യം',
+                'sum1-p': 'അക്കാദമിക് വിദഗ്ധരുടെ സഹായത്തോടെയുള്ള സ്ട്രക്ചറൽ ഓഡിറ്റുകൾ.',
+                'sum2-h': 'പൊതുജനാരോഗ്യം',
+                'sum2-p': 'ശബ്ദം, പൊടി എന്നിവ കുറയ്ക്കുന്നതിനുള്ള മാനദണ്ഡങ്ങൾ.',
+                'sum3-h': 'പ്രതികരണം',
+                'sum3-p': 'ERT, എമർജൻസി ട്രിപ്പ് സ്വിച്ച് എന്നിവയുടെ സംയോജനം.',
+                'sum4-h': 'ഉത്തരവാദിത്തം',
+                'sum4-p': 'ഔദ്യോഗിക ചാനലുകൾ വഴിയുള്ള പരാതി പരിഹാരം.',
+                'footer-text': '© 2025 കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്. \nസുരക്ഷ നമ്മുടെ പങ്കിട്ട ഉത്തരവാദിത്തമാണ്.'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            const ids = Object.keys(t);
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+
+            // Update Page Title
+            document.title = lang === 'ml' ? 'സുരക്ഷാ സർക്കുലറുകളും നയങ്ങളും | കൊച്ചി മെട്രോ' : 'Safety Circulars & Policies | Kochi Metro';
+        }
+
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'kmrl_lang') {
+                applyLanguage(e.newValue);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('kmrl_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>
